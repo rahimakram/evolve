@@ -1,0 +1,553 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gotham-Medium';
+    font-style: normal;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+html {
+    font-size: 62.5%;
+}
+*:hover,
+*:focus {
+  outline: none;
+}
+ol, ul {
+    padding-left: unset;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('../fonts/Gotham/Gotham-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham-Medium';
+    src: url('../fonts/Gotham/Gotham-Medium.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Colors: */
+:root {
+    --background-color: #F9FAFB;
+    --heading-color: #E5E7EB;
+    --title-color:  #374151;
+    --para-color: #6B7280;
+    --primary: #68CADA;
+    --secondary: #DA68C1;
+    --about-title: #1F2937;    
+}
+
+li{
+    list-style: none;
+    margin-bottom: 16px;
+}
+a{
+    text-decoration: none;
+}
+h1{
+    font-size: 40px;
+}
+h2{
+    font-size: 36px;
+    color: var(--title-color);
+}
+h3{
+    font-size: 32px;
+    color: var(--about-title);
+}
+h4{
+    font-size: 24px;
+}
+h5{
+    font-size: 18px;
+}
+h6{
+    font-size: 14px;
+    color: var(--para-color);
+}
+p{
+    color: var(--para-color);
+    font-family: 'Gotham';
+}
+
+
+/* header */
+#header .navbar-brand .site-logo{
+    width: 100px;
+}
+
+nav.navbar .navbar-nav .nav-item .nav-link{
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: #1F2937;    
+}
+
+
+/* hero */
+section.hero{
+    background: 
+        linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
+        url('../images/hero.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 677px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+.ptb-64{
+    padding: 64px 0px;
+}
+.mxw-800{
+    max-width: 800px;
+}
+.hero-content h1{
+    color: #E5E7EB;
+}
+.hero-content h6{
+    font-size: 18px;
+    color: #E5E7EB;
+}
+
+/* our-fitness */
+.our-fitness{
+    padding-top: 128px;
+    padding-bottom: 64px;
+}
+
+
+/* fitness-classes */
+.fitness-classes{
+    margin-bottom: 128px;   
+}
+.card-fc-box{
+    position: relative;
+}
+.card-fc {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    pointer-events: none; /* Allow interactions with underlying content */
+    z-index: 1;
+}
+.card-fc-text{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: max-content;
+}
+.fitness-classes h3,.fitness-classes p{
+    color: #FFF;
+}
+
+
+/* group-fitness */
+.p64{
+    padding: 64px;
+}
+.group-fitness{
+    background-color: #111827;
+}
+.mb-16{
+    margin-bottom: 16px;
+}
+.mb-64{
+    margin-bottom: 64px;
+}
+.p0{
+    padding: 0;
+}
+.btn.btn-schedule{
+    font-size: 16px;
+    color: #FFF;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: #68CADA;
+    margin-top: 32px;
+}
+.group-fitness-bg{
+    background-image: url('../images/fitness-classes/group-fitness-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* our-corporate */
+.our-corporate{
+    background-image: url('../images/our-corporate-bg.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.ptb-128{
+    padding: 128px 0px;
+}
+.transform{
+    background: rgba(255, 255, 255, 1);
+}
+.our-corporate ul{
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(229, 231, 235, 1);
+}
+
+
+/* we-are-evolve */
+.trusted-by h6{
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+/* ready-to-evolve */
+.ready-to-evolve{
+    background: linear-gradient(rgba(104, 202, 218, 0.7), rgba(104, 202, 218, 0.7)), url('../images/our-corporate-bg.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+.ready-to-evolve-content{
+    background: rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+/* site-footer */
+.mt-64{
+    margin-top: 64px;
+}
+.pt-32{
+    padding-top: 32px;
+}
+.bor-top{
+    border-top: 1px solid rgba(229, 231, 235, 1);
+}
+
+
+/* SPORTS EVENT MANAGEMENT */
+.banner{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hero.jfif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    max-height: 536px;
+}
+.my-breadcrumb{
+    padding-bottom: 100px;
+}
+.my-breadcrumb nav ol li a{
+    font-size: 14px;
+    font-family: 'Gotham';
+    color: rgba(229, 231, 235, 1);
+}
+.my-breadcrumb .breadcrumb-item.active{
+    font-family: 'Gotham';
+    color: rgba(104, 202, 218, 1);
+
+}
+.my-breadcrumb .breadcrumb-item+.breadcrumb-item::before{
+    color: rgba(209, 213, 219, 1);
+}
+.banner h1{
+    color: var(--heading-color);
+}
+.banner h6{
+    color: var(--heading-color);
+    font-family: 'Gotham';
+}
+
+/* quote */
+.quote h4{
+    margin: 24px 0px;
+}
+.quote h5{
+    font-size: 18px;
+    color: var(--title-color);
+}
+.quote h6{
+    font-size: 14px;
+    color: var(--para-color);
+}
+
+
+/* KEY SKILLS DEVELOPMENT */
+.gallery .card{
+    border: none;
+    border-radius: 6px;
+}
+.gallery .card-body{
+    padding: 32px 0px 0px;
+}
+.gallery .card-body p{
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* TEAM BUILDING ACTIVITIES */
+.filter-gallery .nav{
+    justify-content: center;
+    gap: 8px;
+}
+.filter-gallery .nav-tabs {
+    border-bottom: none;
+}
+.filter-gallery .nav-tabs .nav-link{
+    font-size: 14px;
+    font-family: 'Gotham';
+    color: var(--primary);
+    padding: 8px 16px;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+}
+.filter-gallery .nav-tabs .nav-link.active{
+    color: #FFFFFF;
+    background: var(--primary);
+}
+.filter-gallery .nav-tabs .nav-link.find{
+    color: var(--secondary);
+    border-color: var(--secondary);
+}
+.filter-gallery .nav-tabs .nav-link.find.active{
+    background-color: var(--secondary);
+    color: #FFFFFF;
+}
+
+
+/* OUR LOCATION */
+.find-your-tab{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: var(--para-color);
+}
+.find-your-tab .btn-find{
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #68CADA40;
+}
+.find-your-tab .btn-find.find{
+    background: #DA68C140;
+}
+#our-locations .card.btn{
+    padding: 0;
+}
+#our-locations .btn-close{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+/* MODEL */
+#our-locations .modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+.ptb-88-98{
+    padding: 88px 98px;
+}
+.mb-24{
+    margin-bottom: 24px;
+}
+.mb-56{
+    margin-bottom: 56px;
+}
+#our-locations .loc-model-body p{
+    color: #000000;
+    margin-bottom: 40px;
+}
+.ofs-h6{
+    color: #374151;
+}
+
+/* CAREERS */
+.career-boxx .career-icon{
+    width: 58px;
+    height: 58px;
+}
+.pb-128{
+    padding-bottom: 128px;
+}
+.career-card-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+.career-card{
+    max-width: 280px;
+}
+.career-boxx .career-card-title{
+    font-size: 18px;
+}
+
+/* CONTACT US */
+.contact-boxx h6{
+    margin-bottom: 16px;
+}
+.contact-boxx p{
+    font-weight: 600;
+}
+/* FORM */
+.log-label{
+    margin-bottom: 8px;
+}
+.log-input input{
+    background-color: #FFFFFF;
+    padding: 8px 12px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    width: 100%;
+}
+.log-input input::placeholder, input[type="date"]{
+    color: #9CA3AF;
+    font-size: 14px;
+    font-family: 'Gotham';
+    height: 42px;
+}
+.mb-32{
+    margin-bottom: 32px;
+}
+.log-group-box{
+    display: flex;
+    gap: 22px;
+}
+#text-area{
+    padding: 8px 12px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 116px;
+}
+
+/* CLASS SCHEDULE */
+.schedule-box{
+    border: 1px solid #E5E7EB;    
+    border-radius: 6px;
+    padding: 32px 10px;
+    min-height: 116px;
+    width: 100%;
+}
+.schedule-box:has(.title) {
+    border: 1px solid #D1D5DB;
+}
+.schedule-title{
+    font-size: 18px;
+    color: #1F2937;
+}
+.schedule-sub-title{
+    font-size: 16px;
+    color: #6B7280;
+    font-family: 'Gotham';
+}
+.schedule .modal-dialog{
+    max-width: 100%;
+    margin: 0;
+}
+.schedule-pop-box{
+    max-width: 1008px;
+    margin: auto;
+    box-shadow: 0px 6px 15px -2px #10182814;
+}
+.schedule .btn-close{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+.pt-88{
+    padding-top: 88px;
+}
+.ptb-32{
+    padding: 32px 0px;
+}
+.schedule .customer-box{
+    border: none;
+    display: flex;
+    padding: 0;
+}
+.schedule .payments-types{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 37px;
+}
+
+
+/* SINGLE CLASS PAYMENT */
+.single-payment, .contact-form{
+    background-color: var(--background-color);
+}
+.customer-box{
+    background-color: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    padding: 36px 32px;
+    margin-bottom: 52px;
+}
+.customer-info-box{
+    display: flex;
+    justify-content: space-between;
+}
+.color-primary{
+    color: var(--primary);
+    font-family: 'Gotham';
+}
+.text-black{
+    color: #000000;
+}
+.instructor{
+    width: 69px;
+    height: 69px;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 13px;
+}
+.total-title{
+    padding-top: 53px;
+}
+.qar-50{
+    margin-bottom: 43px;
+}
+.qar-50 h3 {
+    font-weight: 600;
+}
+input#read-carefully{
+    width: 24px;
+    height: 24px;
+    margin-right: 13px;
+}
+
+/* FITNESS TRAINING */
+.type-of-ftns-title{
+    font-size: 28px;
+}
