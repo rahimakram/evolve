@@ -21,13 +21,9 @@ Auth::routes();
 
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
-Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-
 
 
 // Route::group(['middleware' => ['auth']], function () {
-
 
   Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
 
@@ -44,4 +40,11 @@ Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->nam
   Route::get('/admin/dashboard/{locale}', [App\Http\Controllers\AdminController::class, 'lang']);
   
 // });
+
+
+
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+Route::get('/{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
 

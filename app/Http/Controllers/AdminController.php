@@ -52,8 +52,9 @@ class AdminController extends Controller
 
     public function admin()
     {
+		// echo Auth::user()->name; die;
 		if( !empty(Auth::user()->name) ){
-			return view('admin/dashboard');
+			return redirect('admin/dashboard');
 		} else {
 			return redirect('login');
 		}        
