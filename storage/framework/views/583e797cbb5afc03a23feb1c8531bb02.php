@@ -1,16 +1,16 @@
-@extends('admin.layouts.master')
 
-@section('title') @lang('translation.Toasts') @endsection
-@section('css')
-<link href="{{ URL::asset('build/libs/toastr/build/toastr.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
 
-@section('content')
+<?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.Toasts'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('build/libs/toastr/build/toastr.min.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
-@component('admin.components.breadcrumb')
-@slot('li_1') UI Elements @endslot
-@slot('title') Toasts @endslot
-@endcomponent
+<?php $__env->startSection('content'); ?>
+
+<?php $__env->startComponent('admin.components.breadcrumb'); ?>
+<?php $__env->slot('li_1'); ?> UI Elements <?php $__env->endSlot(); ?>
+<?php $__env->slot('title'); ?> Toasts <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 
 <div class="row">
     <div class="col-xl-12">
@@ -28,7 +28,7 @@
                         <div class="position-fixed top-0 end-0 p-3" style="z-index: 1005">
                             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                                 <div class="toast-header">
-                                    <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" class="me-2" height="18">
+                                    <img src="<?php echo e(URL::asset('build/images/favicon.webp')); ?>" alt="" class="me-2" height="18">
                                     <strong class="me-auto">Bootstrap</strong>
                                     <small>11 mins ago</small>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -63,7 +63,7 @@
                 <div style="min-height: 110px;">
                     <div class="toast fade show" role="alert" aria-live="assertive" data-bs-autohide="false" aria-atomic="true">
                         <div class="toast-header">
-                            <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" class="me-2" height="18">
+                            <img src="<?php echo e(URL::asset('build/images/favicon.webp')); ?>" alt="" class="me-2" height="18">
                             <strong class="me-auto">Skote</strong>
                             <small class="text-muted">11 mins ago</small>
                             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -92,7 +92,7 @@
                 <div style="min-height: 110px;">
                     <div class="toast fade show" role="alert" aria-live="assertive" data-bs-autohide="false" aria-atomic="true">
                         <div class="toast-header">
-                            <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" class="me-2" height="18">
+                            <img src="<?php echo e(URL::asset('build/images/favicon.webp')); ?>" alt="" class="me-2" height="18">
                             <strong class="me-auto">Skote</strong>
                             <small class="text-muted">11 mins ago</small>
                             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -135,7 +135,7 @@
                             <!-- Then put toasts within -->
                             <div class="toast fade show" role="alert" aria-live="assertive" data-bs-autohide="false" aria-atomic="true">
                                 <div class="toast-header">
-                                    <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" class="me-2" height="18">
+                                    <img src="<?php echo e(URL::asset('build/images/favicon.webp')); ?>" alt="" class="me-2" height="18">
                                     <strong class="me-auto">Skote</strong>
                                     <small class="text-muted">just now</small>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -147,7 +147,7 @@
 
                             <div class="toast fade show" role="alert" aria-live="assertive" data-bs-autohide="false" aria-atomic="true">
                                 <div class="toast-header">
-                                    <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" class="me-2" height="18">
+                                    <img src="<?php echo e(URL::asset('build/images/favicon.webp')); ?>" alt="" class="me-2" height="18">
                                     <strong class="me-auto">Skote</strong>
                                     <small class="text-muted">2 sec ago</small>
                                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -215,12 +215,13 @@
 </div>
 <!-- end row -->
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
 
-<script src="{{ URL::asset('build/libs/toastr/build/toastr.min.js') }}"></script>
+<script src="<?php echo e(URL::asset('build/libs/toastr/build/toastr.min.js')); ?>"></script>
 
 <!-- Sweet alert init js-->
-<script src="{{ URL::asset('build/js/pages/toaster.init.js') }}"></script>
-@endsection
+<script src="<?php echo e(URL::asset('build/js/pages/toaster.init.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp\htdocs\evolve.com\resources\views/admin/ui-toasts.blade.php ENDPATH**/ ?>

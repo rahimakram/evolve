@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $viewPage = ( $request->path() == 'user/index' ) ? 'user/home' : 'user/'.$request->path();
         
         if (view()->exists($viewPage)) {

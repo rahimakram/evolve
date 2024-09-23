@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
 <?php echo app('translator')->get('translation.Recover_Password'); ?> 2
 <?php $__env->stopSection(); ?>

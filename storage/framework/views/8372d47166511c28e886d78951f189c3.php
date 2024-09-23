@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     <?php echo app('translator')->get('translation.Two_step_verification'); ?> 2
 <?php $__env->stopSection(); ?>

@@ -31,7 +31,7 @@ class AdminController extends Controller
         // echo $request->path();
 		// print_r(session()->all());
 		// die;
-		if ( $request->path() == 'admin/login' ) {
+		if ( $request->path() == 'login' || $request->path() == 'admin/login' ) {
 			return redirect('admin/dashboard');
 		}		
 		

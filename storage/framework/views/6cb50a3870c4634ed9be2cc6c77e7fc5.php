@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     Confirm Password
 <?php $__env->stopSection(); ?>

@@ -10,6 +10,156 @@
 @endcomponent
 
 <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <!-- <div class="search-box me-2 mb-2 d-inline-block">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
+                                    <i class="bx bx-search-alt search-icon"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#newContactModal"
+                                    class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
+                                        class="mdi mdi-plus me-1"></i> New Contact</button>
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row -->
+                    <div class="table-responsive">
+                        <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100"
+                            id="userList-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 40px;">Code</th>
+                                    <th scope="col">English Name</th>
+                                    <th scope="col">Arabic Name</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col" style="width: 200px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>jhsdghasdgf</td>
+                                    <td>jhsdghasdgf</td>
+                                    <td>jhsdghasdgf</td>
+                                    <td>jhsdghasdgf</td>
+                                    <td>jhsdghasdgf</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-success waves-effect waves-light">
+                                            <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger waves-effect waves-light">
+                                            <i class="bx bx-trash font-size-16 align-middle me-2"></i> Delete
+                                        </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- end table -->
+                    </div>
+                    <!-- end table responsive -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newContactModal" tabindex="-1" aria-labelledby="newContactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newContactModalLabel">Add Contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" class="needs-validation createContact-form" id="createContact-form" novalidate>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="hidden" class="form-control" id="userid-input">
+                                <div class="text-center mb-4">
+                                    <div class="position-relative d-inline-block">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <label for="member-image-input" class="mb-0" data-bs-toggle="tooltip"
+                                                data-bs-placement="right" title="Select Member Image">
+                                                <div class="avatar-xs">
+                                                    <div
+                                                        class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                        <i class="bx bxs-image-alt"></i>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                            <input class="form-control d-none" value="" id="member-image-input"
+                                                type="file" accept="image/png, image/gif, image/jpeg">
+                                        </div>
+                                        <div class="avatar-lg">
+                                            <div class="avatar-title bg-light rounded-circle">
+                                                <img src="{{ URL::asset('build/images/users/user-dummy-img.jpg') }}" id="member-img"
+                                                    class="avatar-md rounded-circle h-auto" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="username-input" class="form-label">User Name</label>
+                                    <input type="text" id="username-input" class="form-control" placeholder="Enter name"
+                                        required />
+                                    <div class="invalid-feedback">Please enter a name.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="designation-input" class="form-label">Designation</label>
+                                    <input type="text" id="designation-input" class="form-control"
+                                        placeholder="Enter Designation" required />
+                                    <div class="invalid-feedback">Please enter a designation.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email-input" class="form-label">Email</label>
+                                    <input type="email" id="email-input" class="form-control"
+                                        placeholder="Enter email" required />
+                                    <div class="invalid-feedback">Please enter email.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tag-input" class="form-label">Tags</label>
+                                    <select class="select2 form-control select2-multiple" id="tag-input"
+                                        multiple="multiple" data-placeholder="Choose ...">
+                                        <option value="Photoshop">Photoshop</option>
+                                        <option value="illustrator">illustrator</option>
+                                        <option value="Html">Html</option>
+                                        <option value="Css">Css</option>
+                                        <option value="Javascript">Javascript</option>
+                                        <option value="Php">Php</option>
+                                        <option value="Java">Java</option>
+                                        <option value="Ruby">Ruby</option>
+                                        <option value="Python">Python</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" id="addContact-btn" class="btn btn-success">Add
+                                        Customer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- end modal body -->
+            </div>
+            <!-- end modal-content -->
+        </div>
+        <!-- end modal-dialog -->
+    </div>
+    <!-- end newContactModal -->
+
+<div class="row">
     <div class="col-xl-4">
         <div class="card overflow-hidden">
             <div class="bg-primary-subtle">
@@ -171,209 +321,7 @@
 </div>
 
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title mb-4">Latest Transaction</h4>
-                <div class="table-responsive">
-                    <table class="table align-middle table-nowrap mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th style="width: 20px;">
-                                    <div class="form-check font-size-16 align-middle">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck01">
-                                        <label class="form-check-label" for="transactionCheck01"></label>
-                                    </div>
-                                </th>
-                                <th class="align-middle">Order ID</th>
-                                <th class="align-middle">Billing Name</th>
-                                <th class="align-middle">Date</th>
-                                <th class="align-middle">Total</th>
-                                <th class="align-middle">Payment Status</th>
-                                <th class="align-middle">Payment Method</th>
-                                <th class="align-middle">View Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                        <label class="form-check-label" for="transactionCheck02"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td>
-                                <td>Neal Matthews</td>
-                                <td>
-                                    07 Oct, 2019
-                                </td>
-                                <td>
-                                    $400
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck03">
-                                        <label class="form-check-label" for="transactionCheck03"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2541</a> </td>
-                                <td>Jamal Burnett</td>
-                                <td>
-                                    07 Oct, 2019
-                                </td>
-                                <td>
-                                    $380
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-danger font-size-11">Chargeback</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-visa me-1"></i> Visa
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck04">
-                                        <label class="form-check-label" for="transactionCheck04"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2542</a> </td>
-                                <td>Juan Mitchell</td>
-                                <td>
-                                    06 Oct, 2019
-                                </td>
-                                <td>
-                                    $384
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck05">
-                                        <label class="form-check-label" for="transactionCheck05"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2543</a> </td>
-                                <td>Barry Dick</td>
-                                <td>
-                                    05 Oct, 2019
-                                </td>
-                                <td>
-                                    $412
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck06">
-                                        <label class="form-check-label" for="transactionCheck06"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2544</a> </td>
-                                <td>Ronald Taylor</td>
-                                <td>
-                                    04 Oct, 2019
-                                </td>
-                                <td>
-                                    $404
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-warning font-size-11">Refund</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-visa me-1"></i> Visa
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck07">
-                                        <label class="form-check-label" for="transactionCheck07"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2545</a> </td>
-                                <td>Jacob Hunter</td>
-                                <td>
-                                    04 Oct, 2019
-                                </td>
-                                <td>
-                                    $392
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- end table-responsive -->
-            </div>
-        </div>
-    </div>
-</div>
 <!-- end row -->
 
 <!-- Transaction Modal -->
@@ -463,7 +411,7 @@
 <!-- end modal -->
 
 <!-- subscribeModal -->
-<div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
@@ -498,7 +446,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end modal -->
 
 @endsection

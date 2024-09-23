@@ -10,7 +10,7 @@
                 <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="index" class="waves-effect">
+                    <a href="{{url('/admin/dashboard')}}" class="waves-effect">
                         <i class="bx bx-list-ul"></i>
                         <span key="t-dashboards">@lang('translation.Dashboards')</span>
                     </a>
@@ -90,6 +90,29 @@
                 <!-- <li class="menu-title" key="t-apps">@lang('translation.Apps')</li> -->
 
                 <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <span key="t-dashboards">@lang('translation.Home')</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="{{route('teams.index')}}" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <span key="t-dashboards">Teams</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-calendar"></i>
                         <span key="t-dashboards">@lang('translation.Calendars')</span>
@@ -98,14 +121,14 @@
                         <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
                         <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
                     </ul>
-                </li>
+                </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="chat" class="waves-effect">
                         <i class="bx bx-chat"></i>
                         <span key="t-chat">@lang('translation.Chat')</span>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- <li>
                     <a href="apps-filemanager" class="waves-effect">
@@ -173,7 +196,7 @@
                     </ul>
                 </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-receipt"></i>
                         <span key="t-invoices">@lang('translation.Invoices')</span>
@@ -183,7 +206,7 @@
                         <li><a href="invoices-detail" key="t-invoice-detail">@lang('translation.Invoice_Detail')</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
 
                 <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -211,7 +234,7 @@
                     </ul>
                 </li> -->
 
-                <li>
+                <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bxs-user-detail"></i>
                         <span key="t-contacts">@lang('translation.Contacts')</span>
@@ -221,7 +244,7 @@
                         <li><a href="contacts-list" key="t-user-list">@lang('translation.User_List')</a></li>
                         <li><a href="contacts-profile" key="t-profile">@lang('translation.Profile')</a></li>
                     </ul>
-                </li>
+                </li> -->
 
                 <!-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

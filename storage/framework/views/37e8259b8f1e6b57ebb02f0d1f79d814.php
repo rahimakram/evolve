@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('title'); ?>
     <?php echo app('translator')->get('translation.Form_Advanced'); ?>
 <?php $__env->stopSection(); ?>

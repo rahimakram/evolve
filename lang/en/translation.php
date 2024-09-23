@@ -1,6 +1,7 @@
 <?php
 
 return [
+  "Home" => "Home",
   "Menu" => "Menu",
   "Dashboards" => "Dashboards",
   "Default" => "Default",
