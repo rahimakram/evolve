@@ -35,7 +35,9 @@ class AdminController extends Controller
 			return redirect('admin/dashboard');
 		}		
 		
-        $viewPage = ( $request->path() == 'admin/index' ) ? 'admin/dashboard' : $request->path();
+        // $viewPage = ( $request->path() == 'admindemo/index' ) ? 'admin/dashboard' : $request->path();
+        $viewPage =  str_replace('admindemo','admin',$request->path());
+
         if (view()->exists($viewPage)) {
             return view($viewPage);
         }

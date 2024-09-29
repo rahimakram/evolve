@@ -3,7 +3,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-3">
-            <img src="./dist/images/footer-logo.png" class="img-fluid" alt="">
+            <img src="<?php echo e(URL::asset('dist/images/footer-logo.png')); ?>" class="img-fluid" alt="">
           </div>
           <div class="col-md-3">
             <h6 class="footer-title">GET IN TOUCH</h6>
@@ -57,16 +57,16 @@
           <div class="col-md-4">
             <div class="footer-social d-flex justify-content-end">
               <span class="pe-4">
-              <img src="./dist/images/footer/facebook.png" class="img-fluid" alt="">
+              <img src="<?php echo e(URL::asset('dist/images/footer/facebook.png')); ?>" class="img-fluid" alt="">
               </span>
               <span class="pe-4">
-              <img src="./dist/images/footer/twiter.png" class="img-fluid" alt="">
+              <img src="<?php echo e(URL::asset('dist/images/footer/twiter.png')); ?>" class="img-fluid" alt="">
               </span>
               <span class="pe-4">
-              <img src="./dist/images/footer/instagram.png" class="img-fluid" alt="">
+              <img src="<?php echo e(URL::asset('dist/images/footer/instagram.png')); ?>" class="img-fluid" alt="">
               </span>
               <span class="">
-              <img src="./dist/images/footer/linkedin.png" class="img-fluid" alt="">
+              <img src="<?php echo e(URL::asset('dist/images/footer/linkedin.png')); ?>" class="img-fluid" alt="">
               </span>
             </div>
           </div>

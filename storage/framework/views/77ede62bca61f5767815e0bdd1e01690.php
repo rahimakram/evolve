@@ -1,6 +1,9 @@
 
 
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.Toasts'); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('build/libs/toastr/build/toastr.min.css')); ?>" rel="stylesheet" type="text/css" />
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
 
@@ -212,5 +215,13 @@
 </div>
 <!-- end row -->
 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+
+<script src="<?php echo e(URL::asset('build/libs/toastr/build/toastr.min.js')); ?>"></script>
+
+<!-- Sweet alert init js-->
+<script src="<?php echo e(URL::asset('build/js/pages/toaster.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\xampp\htdocs\evolve.com\resources\views\admin\ui-toasts.blade.php ENDPATH**/ ?>

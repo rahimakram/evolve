@@ -39,7 +39,7 @@
           </div>
           <div class="col-md-6">
               <div class="videos-box">
-                  <img src="./dist/images/fitness-training/ft-image.png" class="img-fluid" alt="">
+                  <img src="<?php echo e(URL::asset('dist/images/fitness-training/ft-image.png')); ?>" class="img-fluid" alt="">
               </div>
           </div>
         </div>
@@ -59,133 +59,186 @@
       </div>
     </section>
 
-    <section class="gallery">
+    <section class="gallery" id="fitness-training-gallery">
       <div class="container">
         <div class="type-of-ftns-title text-center">Types of Fitness Training</div>
         <div class="ptb-64">
-          <div class="row mb-64">
-            <div class="col-md-4">
+          <div class="row mb-32">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-2.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-2.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-3.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row mb-64">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-4.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img src="./dist/images/key-skills/key-skills-2.png" class="img-fluid" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mb-64">
-            <div class="col-md-4">
+          <div class="row mb-32">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-2.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mb-64">
-            <div class="col-md-4">
+          <div class="row mb-32">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-2.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-32">
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-32">
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="card">
-                <img src="./dist/images/key-skills/key-skills-1.png" class="img-fluid" alt="...">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/training-1.png')); ?>" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Our leadership development course is designed to equip individuals with the essential skills and knowledge needed to excel in leadership roles. Through interactive sessions and practical exercises, participants will learn effective communication, decision-making, and team-building techniques. This course is ideal for aspiring leaders looking to enhance their capabilities and advance their careers.</p>                
+                  <h5 class="card-title">Card title</h5>                  
                 </div>
               </div>
             </div>
@@ -194,19 +247,78 @@
       </div>
     </section>
 
-
-    <section class="quote ptb-128">
+    <section class="gallery" id="fitness-training-gallery2">
       <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="mxw-800 text-center m-auto">
-              <div class="quote-img"><img src="./dist/images/sports-management/Quote.png" class="img-fluid" alt=""></div>
-              <h4>Our team had the pleasure of working with Evolve, and the impact was beyond incredible!</h4>
-              <h5>Ahmad Ali</h5>
-              <h6>AQatar Company</h6>
+        <div class="type-of-ftns-title text-center">Fitness Training Locations</div>
+        <div class="ptb-64">
+          <div class="row mb-32">
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-1.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-2.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-3.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-4.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-2.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-3.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <img src="<?php echo e(URL::asset('dist/images/fitness-training/t-loc-4.png')); ?>" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p>Msheireb</p>                 
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>                 
       </div>
     </section>
 
@@ -218,14 +330,15 @@
             <div class="ready-to-evolve-content mxw-800 p64">
               <h3>Ready to Plan Your Next Event?</h3>
               <p>Give us a call, and let’s discuss how we can create an inspiring and motivating experience that will propel your team forward for the rest of the year.</p>
-              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="./dist/images/fitness-classes/Right.png" class="img-fluid" alt=""></span></a>
+              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="<?php echo e(URL::asset('dist/images/fitness-classes/Right.png')); ?>" class="img-fluid" alt=""></span></a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <?php $__env->stopSection(); ?>
+
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
 

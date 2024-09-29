@@ -28,7 +28,9 @@ Auth::routes();
 
   Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin'])->name('admin');
 
-  Route::get('/admin/{any}', [App\Http\Controllers\AdminController::class, 'adminIndex'])->name('adminIndex');
+  Route::get('/admindemo/{any}', [App\Http\Controllers\AdminController::class, 'adminIndex'])->name('adminIndex');
+
+  // Route::get('/admin/{any}', [App\Http\Controllers\AdminController::class, 'adminIndex'])->name('adminIndex');
 
   // customers route
   Route::get('/admin/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.list');
@@ -38,17 +40,18 @@ Auth::routes();
   Route::post('/admin/update-password/{id}', [App\Http\Controllers\AdminController::class, 'updatePassword'])->name('updatePassword');
   
   //Language Translation
-  Route::get('/admin/dashboard/{locale}', [App\Http\Controllers\AdminController::class, 'lang']);
+  // Route::get('/admin/dashboard/{locale}', [App\Http\Controllers\AdminController::class, 'lang']);
+  Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
 
   // teams
-  Route::get('/dashboard/teams', [TeamController::class, 'index'])->name('teams.index');
-  Route::get('/dashboard/team/add', [TeamController::class, 'add'])->name('teams.add');
-  Route::post('/dashboard/team/create', [TeamController::class, 'create'])->name('teams.create');
-  Route::get('/dashboard/team/edit/{id}', [TeamController::class, 'edit'])->name('teams.edit');
-  Route::post('/dashboard/team/update/{id}', [TeamController::class, 'update'])->name('teams.update');
-  Route::post('/dashboard/team/delete/{id}', [TeamController::class, 'delete'])->name('teams.delete');
-  Route::post('/dashboard/team/activate/{id}', [TeamController::class, 'activate'])->name('teams.activate');
-  Route::post('/dashboard/team/deactivate/{id}', [TeamController::class, 'deactivate'])->name('teams.deactivate');
+  Route::get('/admin/teams', [TeamController::class, 'index'])->name('teams.index');
+  Route::get('/admin/team/add', [TeamController::class, 'add'])->name('teams.add');
+  Route::post('/admin/team/create', [TeamController::class, 'create'])->name('teams.create');
+  Route::get('/admin/team/edit/{id}', [TeamController::class, 'edit'])->name('teams.edit');
+  Route::post('/admin/team/update/{id}', [TeamController::class, 'update'])->name('teams.update');
+  Route::post('/admin/team/delete/{id}', [TeamController::class, 'delete'])->name('teams.delete');
+  Route::post('/admin/team/activate/{id}', [TeamController::class, 'activate'])->name('teams.activate');
+  Route::post('/admin/team/deactivate/{id}', [TeamController::class, 'deactivate'])->name('teams.deactivate');
 // });
 
 

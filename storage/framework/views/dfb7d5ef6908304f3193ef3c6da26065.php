@@ -72,7 +72,7 @@
             <!-- Button trigger modal -->
             <div class="schedule-box btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop-201">
               <div class="schedule-title">Slow Flow (Lola)</div>
-              <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>Kempinski Marsa Malaz</div>
+              <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>Kempinski Marsa Malaz</div>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop-201" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop-201Label" aria-hidden="true">
@@ -85,7 +85,7 @@
                       
                       <div class="customer-info-box">
                         <div class="cus-info">                        
-                          <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>Steigenberger Hotel Doha<span class="px-2">.</span><span class="color-primary pe-2">View map</span><span><img src="./dist/images/arrow-top.png" class="img-fluid" alt=""></span></div>
+                          <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>Steigenberger Hotel Doha<span class="px-2">.</span><span class="color-primary pe-2">View map</span><span><img src="<?php echo e(URL::asset('dist/images/arrow-top.png')); ?>" class="img-fluid" alt=""></span></div>
                           <p class="ptb-32">Join us on Wednesday from 6:30 to 7:30 pm for Slow Flow at Steigenberger Hotel Doha by Marwa. This rejuvenating session is designed to harmonize mind, body, and spirit through gentle poses, mindful breathing, and relaxation techniques. Whether you're a beginner or seasoned practitioner, discover inner peace and holistic wellness in a serene setting. Come experience the transformative power of Slow Flow with us.</p>
                           <div class="text-black py-3">Day: Tuesday</div>
                           <div class="text-black">Time: 6:30 PM - 7:30 PM (1 hour)</div>
@@ -114,7 +114,7 @@
                         <div class="cus-profile">
                           <div class="text-black mb-3">Instructor(S)</div>
                           <div class="d-flex align-items-center">
-                            <div class="instructor"><img src="./dist/images/marwa.png" class="img-fluid" alt=""></div>
+                            <div class="instructor"><img src="<?php echo e(URL::asset('dist/images/marwa.png')); ?>" class="img-fluid" alt=""></div>
                             <div class="instructor-name text-black">Marwa</div>
                           </div>
                         </div>
@@ -141,7 +141,7 @@
           <div class="col-md-3">
             <div class="schedule-box">
               <div class="schedule-title">Aerobics (Derrick)</div>
-              <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>Steigenberger Hotel Doha</div>
+              <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>Steigenberger Hotel Doha</div>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@
           <div class="col-md-3">
             <div class="schedule-box">
               <div class="schedule-title">Slow Flow (Marwa)</div>
-              <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>Steigenberger Hotel Doha</div>
+              <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>Steigenberger Hotel Doha</div>
             </div>
           </div>
         </div>
@@ -183,7 +183,7 @@
           <div class="col-md-3">
             <div class="schedule-box">
               <div class="schedule-title">Slow Flow (Ayesha)</div>
-              <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>The Bentley Luxury Hotel and Suites</div>
+              <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>The Bentley Luxury Hotel and Suites</div>
             </div>
           </div>
           <div class="col-md-3">
@@ -205,7 +205,7 @@
           <div class="col-md-3">
             <div class="schedule-box">
               <div class="schedule-title">Slow Flow (Ayesha)</div>
-              <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>The Bentley Luxury Hotel and Suites</div>              
+              <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>The Bentley Luxury Hotel and Suites</div>              
             </div>
           </div>
           <div class="col-md-3">

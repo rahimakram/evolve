@@ -19,14 +19,14 @@
                 <h2 class="text-black">Slow Flow</h2>
                 <div class="customer-info-box">
                   <div class="cus-info">
-                    <div class="schedule-sub-title"><span><img src="./dist/images/location-marker.png" class="img-fluid" alt=""></span>Steigenberger Hotel Doha<span class="px-2">.</span><span class="color-primary pe-2">View map</span><span><img src="./dist/images/arrow-top.png" class="img-fluid" alt=""></span></div>
+                    <div class="schedule-sub-title"><span><img src="<?php echo e(URL::asset('dist/images/location-marker.png')); ?>" class="img-fluid" alt=""></span>Steigenberger Hotel Doha<span class="px-2">.</span><span class="color-primary pe-2">View map</span><span><img src="<?php echo e(URL::asset('dist/images/arrow-top.png')); ?>" class="img-fluid" alt=""></span></div>
                     <div class="text-black py-3">Day: Tuesday</div>
                     <div class="text-black">Time: 6:30 PM - 7:30 PM (1 hour)</div>
                   </div>
                   <div class="cus-profile">
                     <div class="text-black mb-3">Instructor(S)</div>
                     <div class="d-flex align-items-center">
-                      <div class="instructor"><img src="./dist/images/marwa.png" class="img-fluid" alt=""></div>
+                      <div class="instructor"><img src="<?php echo e(URL::asset('dist/images/marwa.png')); ?>" class="img-fluid" alt=""></div>
                       <div class="instructor-name text-black">Marwa</div>
                     </div>
                   </div>

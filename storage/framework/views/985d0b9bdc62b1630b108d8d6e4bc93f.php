@@ -4,6 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
 
+
     <!-- BANNER -->
     <section class="banner ptb-128">
         <div class="container">
@@ -33,8 +34,8 @@
         <div class="row text-center">
           <div class="col-md-4">
             <div class="cont-card">
-              <img src="./dist/images/contact/mail.png" class="img-fluid" alt="...">
-              <div class="cont-card-body pt-32">
+              <img src="<?php echo e(URL::asset('dist/images/contact/mail.png')); ?>" class="img-fluid mb-16" alt="...">
+              <div class="cont-card-body">
                 <h5>Email</h5>
                 <h6>Our friendly team is here to help.</h6>
                 <p>info@evolvemindbodysoul.com</p>               
@@ -43,8 +44,8 @@
           </div>
           <div class="col-md-4">
             <div class="cont-card">
-              <img src="./dist/images/contact/location-marker.png" class="img-fluid" alt="...">
-              <div class="cont-card-body pt-32">
+              <img src="<?php echo e(URL::asset('dist/images/contact/building-office.png')); ?>" class="img-fluid mb-16" alt="...">
+              <div class="cont-card-body">
                 <h5>Office</h5>
                 <h6>Come say hello at our office HQ.</h6>
                 <p>Office 1, 2nd Floor (Workinton),Alfardan Centre, Grand Hamad Street,P. O. Box 39428, Doha, Qatar</p>               
@@ -53,8 +54,8 @@
           </div>
           <div class="col-md-4">
             <div class="cont-card">
-              <img src="./dist/images/contact/phone.png" class="img-fluid" alt="...">
-              <div class="cont-card-body pt-32">
+              <img src="<?php echo e(URL::asset('dist/images/contact/phone.png')); ?>" class="img-fluid mb-16" alt="...">
+              <div class="cont-card-body">
                 <h5>WhatsApp / Phone</h5>
                 <h6>Sun-Thu from 9am to 5pm.</h6>
                 <p>(+974) 5040 3234</p>               
@@ -101,7 +102,7 @@
                   <div class="log-input"><textarea name="text-area" id="text-area" placeholder="Tell us a little bit about your inquiry."></textarea></div>
                 </div>
               </div>
-              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="./dist/images/fitness-classes/Right.png" class="img-fluid" alt=""></span></a>
+              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="<?php echo e(URL::asset('dist/images/fitness-classes/Right.png')); ?>" class="img-fluid" alt=""></span></a>
             </form>
           </div>
         </div>
@@ -116,7 +117,7 @@
             <div class="ready-to-evolve-content p64">
               <h3>Ready to Evolve?</h3>
               <p>Reach out to us to learn more about our services, schedule a consultation, or inquire about our corporate wellness programs.</p>
-              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="./dist/images/fitness-classes/Right.png" class="img-fluid" alt=""></span></a>
+              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="<?php echo e(URL::asset('dist/images/fitness-classes/Right.png')); ?>" class="img-fluid" alt=""></span></a>
             </div>
           </div>
         </div>
@@ -124,8 +125,7 @@
     </section>
 
 
-    
-    <?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
 

@@ -234,7 +234,7 @@ unset($__sessionArgs); ?>
         }).then((result) => {
             if (result.isConfirmed) {
                 // If the user confirms, submit the form
-                document.getElementById('delete_trainer_form_' + teamId).submit();
+                document.getElementById('delete_trainer_form_' + trainerId).submit();
             }
         })
     }
@@ -251,7 +251,23 @@ unset($__sessionArgs); ?>
         }).then((result) => {
             if (result.isConfirmed) {
                 // If the user confirms, submit the form
-                document.getElementById('deactivate_trainer_form_' + teamId).submit();
+                document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+            }
+        })
+    }
+
+    function confirmActivate(trainerId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to activate this trainer!",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, activate it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('activate_trainer_form_' + trainerId).submit();
             }
         })
     }

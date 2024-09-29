@@ -1,39 +1,24 @@
-// Course-Category
-$('.events').owlCarousel({
-    loop:true,
-    margin:20,
-    dotsEach:2/true,
-    nav:true,
-    responsive:{
-        0:{
-            items:1.5
-        },
-        767:{
-            items:3
-        },
-        991:{
-            items:4
-        },
-        1024:{
-            items:5
+// Counter
+$(document).ready(function() {
+    $('.counter').each(function () {
+      var $this = $(this);
+      var countTo = $this.text().replace(/\D/g, ''); // Extract numeric value (removes non-numeric characters like +)
+      
+      $this.prop('Counter', 0).animate({
+        Counter: countTo
+      }, {
+        duration: 4000,
+        easing: 'swing',
+        step: function (now) {
+          var displayNumber = Math.ceil(now);
+          if ($this.text().includes('+')) {
+            $this.text(displayNumber + '+'); // Append '+' only if it was originally present
+          } else {
+            $this.text(displayNumber); // No '+' for others
+          }
         }
-    }
-})
-
-
-// events-details-login
-const minusButton = document.getElementById('minus');
-const plusButton = document.getElementById('plus');
-const inputField = document.getElementById('input');
-
-minusButton.addEventListener('click', event => {
-  event.preventDefault();
-  const currentValue = Number(inputField.value) || 0;
-  inputField.value = currentValue - 1;
-});
-
-plusButton.addEventListener('click', event => {
-  event.preventDefault();
-  const currentValue = Number(inputField.value) || 0;
-  inputField.value = currentValue + 1;
-});
+      });
+    });
+  });
+  
+  

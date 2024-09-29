@@ -4,6 +4,7 @@
 
 <?php $__env->startSection('content'); ?>
 
+
     <!-- BANNER -->
     <section class="banner ptb-128">
         <div class="container">
@@ -29,7 +30,7 @@
 
 
     <!-- PARA-SECTION -->
-    <section class="our-fitness">
+    <section class="our-fitness ptb-128">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -44,7 +45,7 @@
 
 
     <!-- ABOUT -->
-    <section class="tournament mt-64">
+    <section class="tournament mb-64">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6">
@@ -57,77 +58,75 @@
             </div>
             <div class="col-md-6">
                 <div class="videos-box p64 ps-md-0">
-                    <img src="./dist/images/sports-management/sports-vid1.png" class="img-fluid" alt="">
+                  <video autoplay="" loop="" controls="" 
+                  poster="<?php echo e(URL::asset('dist/images/sports-management/Video1.png')); ?>">
+                  <source type="video/mp4" src="<?php echo e(URL::asset('dist/images/sports-management/dummy-video.mp4')); ?>">             
+                  </video>
+                </div>                
+            </div>
+          </div>
+
+          <div class="row align-items-center mt-64">
+            <div class="col-md-6">
+                <div class="p64">
+                    <h3>Muay Thai Roadshow 2016</h3>
+                    <p>Evolve in association with the Ministry of Foreign Affairs of Thailand and the Royal Thai Embassy in Qatar and Grand Hyatt Doha brought the sport of Muay Thai to Doha in 2016. Leading Muay Thai fighters and Coaches came to Doha for a unique event open to the public for free.<br><br>
+                      The Evolve Martial Arts Team along with the delegation from Thailand delivered workshops and live fight exhibitions as well as a seminar on the background into the sport and the cultural ceremonies that surround it.<br><br>
+                      The event took place in the Ballroom of the Grand Hyatt Doha on Saturday 20th August and was well attend by representatives from Qatar Olympic Committee attended with a host of Ambassadors at the invitation of H.E. Soonthorn Chaiyindeepum, ambassador of Thailand to Qatar. Hosting the largest public event for Muay Thai in Doha’s history, the martial arts workshop conducted as part of the event included close to 100 participants with over 15 coaches.</p>
+                </div>                
+            </div>
+            <div class="col-md-6">
+              <div class="videos-box p64 ps-md-0">
+                <video autoplay="" loop="" controls="" 
+                poster="<?php echo e(URL::asset('dist/images/sports-management/Video1.png')); ?>">
+                <source type="video/mp4" src="<?php echo e(URL::asset('dist/images/sports-management/dummy-video.mp4')); ?>">             
+                </video>
+              </div> 
+            </div>
+          </div>
+
+          <div class="row align-items-center mt-64">
+            <div class="col-md-6">
+                <div class="p64">
+                    <h3>Qatar National Sports Day</h3>
+                    <p>Are you aiming to host a sports day that goes above and beyond expectations? Let Evolve Wellness take the lead in creating an unforgettable experience for your participants!<br><br>
+                      From initial planning to flawless execution, we specialize in organizing and delivering sports day activations that are packed with thrilling activities, engaging entertainment, and much more.<br><br>
+                      Our team is dedicated to ensuring that every aspect of your sports day is tailored to your needs and leaves a lasting impression on your attendees.</p>
+                </div>                
+            </div>
+            <div class="col-md-6">
+              <div class="videos-box p64 ps-md-0">
+                <video autoplay="" loop="" controls="" 
+                poster="<?php echo e(URL::asset('dist/images/sports-management/Video1.png')); ?>">
+                <source type="video/mp4" src="<?php echo e(URL::asset('dist/images/sports-management/dummy-video.mp4')); ?>">             
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="p64">
+                    <h3>Family Day Events</h3>
+                    <p>Creating a fun-filled environment where families can connect, laugh and make unforgettable memories is something we love to do for our clients. Designing vibrant and engaging activities that caters for a variety of age groups is our main objective. Our understanding of how to incorporate local culture and taste allows us to craft unique and exciting activities, from thrilling games and captivating entertainment to wellness areas and cozy relaxation spots.</p>
+                </div>                
+            </div>
+            <div class="col-md-6">
+                <div class="videos-box p64 ps-md-0">
+                    <img src="<?php echo e(URL::asset('dist/images/sports-management/image-1.png')); ?>" class="img-fluid" alt="">
                 </div>
             </div>
           </div>
         </div>
     </section>
 
-    <section class="tournament mt-64">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-              <div class="p64">
-                  <h3>Muay Thai Roadshow 2016</h3>
-                  <p>Evolve in association with the Ministry of Foreign Affairs of Thailand and the Royal Thai Embassy in Qatar and Grand Hyatt Doha brought the sport of Muay Thai to Doha in 2016. Leading Muay Thai fighters and Coaches came to Doha for a unique event open to the public for free.<br><br>
-                    The Evolve Martial Arts Team along with the delegation from Thailand delivered workshops and live fight exhibitions as well as a seminar on the background into the sport and the cultural ceremonies that surround it.<br><br>
-                    The event took place in the Ballroom of the Grand Hyatt Doha on Saturday 20th August and was well attend by representatives from Qatar Olympic Committee attended with a host of Ambassadors at the invitation of H.E. Soonthorn Chaiyindeepum, ambassador of Thailand to Qatar. Hosting the largest public event for Muay Thai in Doha’s history, the martial arts workshop conducted as part of the event included close to 100 participants with over 15 coaches.</p>
-              </div>                
-          </div>
-          <div class="col-md-6">
-              <div class="videos-box p64 ps-md-0">
-                  <img src="./dist/images/sports-management/sports-vid2.png" class="img-fluid" alt="">
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tournament mt-64">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-              <div class="p64">
-                  <h3>Qatar National Sports Day</h3>
-                  <p>Are you aiming to host a sports day that goes above and beyond expectations? Let Evolve Wellness take the lead in creating an unforgettable experience for your participants!<br><br>
-                    From initial planning to flawless execution, we specialize in organizing and delivering sports day activations that are packed with thrilling activities, engaging entertainment, and much more.<br><br>
-                    Our team is dedicated to ensuring that every aspect of your sports day is tailored to your needs and leaves a lasting impression on your attendees.</p>
-              </div>                
-          </div>
-          <div class="col-md-6">
-              <div class="videos-box p64 ps-md-0">
-                  <img src="./dist/images/sports-management/sports-vid3.png" class="img-fluid" alt="">
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tournament mt-64 mb-64">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-              <div class="p64">
-                  <h3>Qatar Family Day</h3>
-                  <p>Section body. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a mattis elit. Nunc vel lectus libero. Sed quis sem ac sem imperdiet rutrum. Phasellus vel pulvinar tortor, ac scelerisque purus. Vivamus vitae aliquet orci. Morbi purus odio, ornare a dignissim in, suscipit eget neque. Donec bibendum dui non ullamcorper lobortis. In semper libero non quam mollis elementum sit amet et erat. Morbi suscipit libero ut tortor eleifend tincidunt. Nullam cursus pulvinar posuere. Sed ullamcorper venenatis nisi, sit amet viverra augue dignissim ut. Donec fringilla nulla quis leo pellentesque dignissim. Mauris volutpat dolor risus. Nullam interdum felis in diam cursus consequat.</p>
-              </div>                
-          </div>
-          <div class="col-md-6">
-              <div class="videos-box p64 ps-md-0">
-                  <img src="./dist/images/sports-management/sports-vid4.png" class="img-fluid" alt="">
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="quote ptb-128">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <div class="mxw-800 text-center m-auto">
-              <div class="quote-img"><img src="./dist/images/sports-management/Quote.png" class="img-fluid" alt=""></div>
+              <div class="quote-img"><img src="<?php echo e(URL::asset('dist/images/sports-management/Quote.png')); ?>" class="img-fluid" alt=""></div>
               <h4>Our team had the pleasure of working with Evolve, and the impact was beyond incredible!</h4>
               <h5>Ahmad Ali</h5>
               <h6>AQatar Company</h6>
@@ -145,15 +144,15 @@
             <div class="ready-to-evolve-content mxw-800 p64">
               <h3>Ready to Plan Your Next Event?</h3>
               <p>Give us a call, and let’s discuss how we can create an inspiring and motivating experience that will propel your team forward for the rest of the year.</p>
-              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="./dist/images/fitness-classes/Right.png" class="img-fluid" alt=""></span></a>
+              <a href="#" class="btn btn-schedule">Get in Touch <span class="ps-3"><img src="<?php echo e(URL::asset('dist/images/fitness-classes/Right.png')); ?>" class="img-fluid" alt=""></span></a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    
-    <?php $__env->stopSection(); ?>
+
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
 
