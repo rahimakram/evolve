@@ -101,10 +101,58 @@
                 </li>
 
                 <li>
-                    <a href="<?php echo e(route('teams.index')); ?>" class="waves-effect">
+                    <a href="<?php echo e(route('admin.location.index')); ?>" class="waves-effect">
                         <i class="bx bx-home"></i>
                         <!-- <span key="t-dashboards"><?php echo app('translator')->get('translation.Home'); ?></span> -->
-                        <span key="t-dashboards">Teams</span>
+                        <span key="t-dashboards">Location</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar"><?php echo app('translator')->get('translation.TUI_Calendar'); ?></a></li>
+                        <li><a href="calendar-full" key="t-full-calendar"><?php echo app('translator')->get('translation.Full_Calendar'); ?></a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('admin.teams.index')); ?>" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards"><?php echo app('translator')->get('translation.Home'); ?></span> -->
+                        <span key="t-dashboards">Teams / Instructor</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar"><?php echo app('translator')->get('translation.TUI_Calendar'); ?></a></li>
+                        <li><a href="calendar-full" key="t-full-calendar"><?php echo app('translator')->get('translation.Full_Calendar'); ?></a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('admin.profession.index')); ?>" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards"><?php echo app('translator')->get('translation.Home'); ?></span> -->
+                        <span key="t-dashboards">Profession</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar"><?php echo app('translator')->get('translation.TUI_Calendar'); ?></a></li>
+                        <li><a href="calendar-full" key="t-full-calendar"><?php echo app('translator')->get('translation.Full_Calendar'); ?></a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('admin.activity.index')); ?>" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards"><?php echo app('translator')->get('translation.Home'); ?></span> -->
+                        <span key="t-dashboards">Activity</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar"><?php echo app('translator')->get('translation.TUI_Calendar'); ?></a></li>
+                        <li><a href="calendar-full" key="t-full-calendar"><?php echo app('translator')->get('translation.Full_Calendar'); ?></a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="<?php echo e(route('admin.specialization.index')); ?>" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards"><?php echo app('translator')->get('translation.Home'); ?></span> -->
+                        <span key="t-dashboards">Specializations</span>
                     </a>
                     <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="calendar" key="t-tui-calendar"><?php echo app('translator')->get('translation.TUI_Calendar'); ?></a></li>
@@ -393,8 +441,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="tables-basic" key="t-basic-tables"><?php echo app('translator')->get('translation.Basic_Tables'); ?></a></li>
                         <li><a href="tables-datatable" key="t-data-tables"><?php echo app('translator')->get('translation.Data_Tables'); ?></a></li>
-                        <li><a href="tables-responsive"
-                                key="t-responsive-table"><?php echo app('translator')->get('translation.Responsive_Table'); ?></a></li>
+                        <li><a href="tables-responsive" key="t-responsive-table"><?php echo app('translator')->get('translation.Responsive_Table'); ?></a></li>
                         <li><a href="tables-editable" key="t-editable-table"><?php echo app('translator')->get('translation.Editable_Table'); ?></a>
                         </li>
                     </ul>
@@ -412,8 +459,7 @@
                         <li><a href="charts-flot" key="t-flot-charts"><?php echo app('translator')->get('translation.Flot_Charts'); ?></a></li>
                         <li><a href="charts-tui" key="t-ui-charts"><?php echo app('translator')->get('translation.Toast_UI_Charts'); ?></a></li>
                         <li><a href="charts-knob" key="t-knob-charts"><?php echo app('translator')->get('translation.Jquery_Knob_Charts'); ?></a></li>
-                        <li><a href="charts-sparkline"
-                                key="t-sparkline-charts"><?php echo app('translator')->get('translation.Sparkline_Charts'); ?></a></li>
+                        <li><a href="charts-sparkline" key="t-sparkline-charts"><?php echo app('translator')->get('translation.Sparkline_Charts'); ?></a></li>
                     </ul>
                 </li>
 
@@ -424,8 +470,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="icons-boxicons" key="t-boxicons"><?php echo app('translator')->get('translation.Boxicons'); ?></a></li>
-                        <li><a href="icons-materialdesign"
-                                key="t-material-design"><?php echo app('translator')->get('translation.Material_Design'); ?></a></li>
+                        <li><a href="icons-materialdesign" key="t-material-design"><?php echo app('translator')->get('translation.Material_Design'); ?></a></li>
                         <li><a href="icons-dripicons" key="t-dripicons"><?php echo app('translator')->get('translation.Dripicons'); ?></a></li>
                         <li><a href="icons-fontawesome" key="t-font-awesome"><?php echo app('translator')->get('translation.Font_awesome'); ?></a></li>
                     </ul>

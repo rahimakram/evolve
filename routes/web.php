@@ -2,6 +2,10 @@
 
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\ProfessionController;
+use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\TeamController;
 
 /*
@@ -43,16 +47,67 @@ Auth::routes();
   // Route::get('/admin/dashboard/{locale}', [App\Http\Controllers\AdminController::class, 'lang']);
   Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
 
-  // teams
-  Route::get('/admin/teams', [TeamController::class, 'index'])->name('teams.index');
-  Route::get('/admin/team/add', [TeamController::class, 'add'])->name('teams.add');
-  Route::post('/admin/team/create', [TeamController::class, 'create'])->name('teams.create');
-  Route::get('/admin/team/edit/{id}', [TeamController::class, 'edit'])->name('teams.edit');
-  Route::post('/admin/team/update/{id}', [TeamController::class, 'update'])->name('teams.update');
-  Route::post('/admin/team/delete/{id}', [TeamController::class, 'delete'])->name('teams.delete');
-  Route::post('/admin/team/activate/{id}', [TeamController::class, 'activate'])->name('teams.activate');
-  Route::post('/admin/team/deactivate/{id}', [TeamController::class, 'deactivate'])->name('teams.deactivate');
-// });
+  Route::prefix('admin')->as('admin.')->group(function () {
+    // teams
+    Route::controller(TeamController::class)->prefix('team')->as('teams.')->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/add', 'add')->name('add');
+      Route::post('/create', 'create')->name('create');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update/{id}', 'update')->name('update');
+      Route::post('/delete/{id}', 'delete')->name('delete');
+      Route::post('/activate/{id}', 'activate')->name('activate');
+      Route::post('/deactivate/{id}', 'deactivate')->name('deactivate');
+    });
+  
+    // profession
+    Route::controller(ProfessionController::class)->prefix('profession')->as('profession.')->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/add', 'add')->name('add');
+      Route::post('/create', 'create')->name('create');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update/{id}', 'update')->name('update');
+      Route::post('/delete/{id}', 'delete')->name('delete');
+      Route::post('/activate/{id}', 'activate')->name('activate');
+      Route::post('/deactivate/{id}', 'deactivate')->name('deactivate');
+    });
+  
+    // Activity
+    Route::controller(ActivityController::class)->prefix('activity')->as('activity.')->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/add', 'add')->name('add');
+      Route::post('/create', 'create')->name('create');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update/{id}', 'update')->name('update');
+      Route::post('/delete/{id}', 'delete')->name('delete');
+      Route::post('/activate/{id}', 'activate')->name('activate');
+      Route::post('/deactivate/{id}', 'deactivate')->name('deactivate');
+    });
+  
+    // Specialization
+    Route::controller(SpecializationController::class)->prefix('specialization')->as('specialization.')->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/add', 'add')->name('add');
+      Route::post('/create', 'create')->name('create');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update/{id}', 'update')->name('update');
+      Route::post('/delete/{id}', 'delete')->name('delete');
+      Route::post('/activate/{id}', 'activate')->name('activate');
+      Route::post('/deactivate/{id}', 'deactivate')->name('deactivate');
+    });
+  
+    // Location
+    Route::controller(LocationController::class)->prefix('location')->as('location.')->group(function () {
+      Route::get('/', 'index')->name('index');
+      Route::get('/add', 'add')->name('add');
+      Route::post('/create', 'create')->name('create');
+      Route::get('/edit/{id}', 'edit')->name('edit');
+      Route::post('/update/{id}', 'update')->name('update');
+      Route::post('/delete/{id}', 'delete')->name('delete');
+      Route::post('/activate/{id}', 'activate')->name('activate');
+      Route::post('/deactivate/{id}', 'deactivate')->name('deactivate');
+    });
+  });
 
 
 

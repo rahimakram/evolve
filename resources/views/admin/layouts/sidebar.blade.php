@@ -10,7 +10,7 @@
                 <li class="menu-title" key="t-menu">@lang('translation.Menu')</li>
 
                 <li>
-                    <a href="{{url('/admin/dashboard')}}" class="waves-effect">
+                    <a href="{{ url('/admin/dashboard') }}" class="waves-effect">
                         <i class="bx bx-list-ul"></i>
                         <span key="t-dashboards">@lang('translation.Dashboards')</span>
                     </a>
@@ -101,10 +101,58 @@
                 </li>
 
                 <li>
-                    <a href="{{route('teams.index')}}" class="waves-effect">
+                    <a href="{{ route('admin.location.index') }}" class="waves-effect">
                         <i class="bx bx-home"></i>
                         <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
-                        <span key="t-dashboards">Teams</span>
+                        <span key="t-dashboards">Location</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.teams.index') }}" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <span key="t-dashboards">Teams / Instructor</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.profession.index') }}" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <span key="t-dashboards">Profession</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.activity.index') }}" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <span key="t-dashboards">Activity</span>
+                    </a>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
+                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
+                    </ul> -->
+                </li>
+
+                <li>
+                    <a href="{{ route('admin.specialization.index') }}" class="waves-effect">
+                        <i class="bx bx-home"></i>
+                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <span key="t-dashboards">Specializations</span>
                     </a>
                     <!-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
@@ -393,8 +441,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="tables-basic" key="t-basic-tables">@lang('translation.Basic_Tables')</a></li>
                         <li><a href="tables-datatable" key="t-data-tables">@lang('translation.Data_Tables')</a></li>
-                        <li><a href="tables-responsive"
-                                key="t-responsive-table">@lang('translation.Responsive_Table')</a></li>
+                        <li><a href="tables-responsive" key="t-responsive-table">@lang('translation.Responsive_Table')</a></li>
                         <li><a href="tables-editable" key="t-editable-table">@lang('translation.Editable_Table')</a>
                         </li>
                     </ul>
@@ -412,8 +459,7 @@
                         <li><a href="charts-flot" key="t-flot-charts">@lang('translation.Flot_Charts')</a></li>
                         <li><a href="charts-tui" key="t-ui-charts">@lang('translation.Toast_UI_Charts')</a></li>
                         <li><a href="charts-knob" key="t-knob-charts">@lang('translation.Jquery_Knob_Charts')</a></li>
-                        <li><a href="charts-sparkline"
-                                key="t-sparkline-charts">@lang('translation.Sparkline_Charts')</a></li>
+                        <li><a href="charts-sparkline" key="t-sparkline-charts">@lang('translation.Sparkline_Charts')</a></li>
                     </ul>
                 </li>
 
@@ -424,8 +470,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="icons-boxicons" key="t-boxicons">@lang('translation.Boxicons')</a></li>
-                        <li><a href="icons-materialdesign"
-                                key="t-material-design">@lang('translation.Material_Design')</a></li>
+                        <li><a href="icons-materialdesign" key="t-material-design">@lang('translation.Material_Design')</a></li>
                         <li><a href="icons-dripicons" key="t-dripicons">@lang('translation.Dripicons')</a></li>
                         <li><a href="icons-fontawesome" key="t-font-awesome">@lang('translation.Font_awesome')</a></li>
                     </ul>

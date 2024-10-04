@@ -86,7 +86,7 @@ h6{
     font-family: 'Gotham'; 
 }
 p{
-    font-size: 18px;
+    font-size: 16px;
     line-height: 28px;
     color: var(--para-color);
     font-family: 'Gotham';
@@ -165,18 +165,37 @@ video{
     width: 100%;
     height: auto;    
 }
-
+.br-1{
+    border-right: 1px solid #E5E7EB;
+    padding-right: 32px;
+    margin-right: 32px;    
+}
 
 /********** header **********/
 #header .navbar-brand .site-logo{
     width: 100px;
 }
-
+#header nav.navbar .navbar-nav .nav-item{
+    margin-bottom: unset;
+}
 nav.navbar .navbar-nav .nav-item .nav-link{
     font-size: 14px;
     padding: 10px 16px;
     border-radius: 8px;
     color: #1F2937;    
+}
+nav.navbar .navbar-nav .nav-item .nav-link:hover{
+    color: var(--primary);
+}
+nav.navbar .navbar-nav .nav-item .nav-link.active{
+    color: var(--primary);
+}
+.dropdown-item{
+    font-size: 14px;
+}
+.dropdown-item.active{
+    background-color: unset;
+    color: var(--primary);
 }
 
 
@@ -208,6 +227,7 @@ section.hero{
 }
 
 /********** fitness-classes **********/
+
 .fitness-classes .group-fitness p{
     font-size: 16px;
 }
@@ -264,6 +284,10 @@ section.hero{
     border-radius: 8px;
     background-color: var(--primary);
     margin-top: 32px;
+    transition: ease-in-out .4s;
+}
+a.btn.btn-schedule:hover {
+    transform: scale(1.05);
 }
 .btn.btn-schedule.two{
     color: var(--primary);
@@ -341,12 +365,25 @@ section.hero{
     color: var(--about-title);
     font-weight: 600;
 }
+.site-footer .footer-title:hover{
+    color: var(--primary);
+}
 .site-footer ul li h6{
     color: var(--para-color);
     margin-bottom: unset;
 }
+.site-footer ul li h6:hover{
+    color: var(--primary);
+}
 .footer-menu ul li h6{
     font-family: 'Gotham-Medium';
+}
+.footer-menu ul li h6:hover{
+    color: var(--primary);
+}
+.footer-social img:hover{
+    transition: ease-in-out 1s;
+    transform: rotate(360deg);
 }
 /********** SPORTS EVENT MANAGEMENT **********/
 .banner{
@@ -408,12 +445,31 @@ section.quote{
     padding: 32px 0px 0px;
 }
 .gallery .card-body p{
+    font-size: 14px;
+    line-height: 20px;
     display: -webkit-box;
     -webkit-line-clamp: 3; /* number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+#our-team-gallery .card-img-box{
+    max-width: 176px;
+    max-height: 176px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);    
+}
+#our-team-gallery .card-img-box img:hover{
+    transition: ease-in-out 1s;
+    transform: scale(1.30);
+}
+
+#our-team-gallery .card-body h5{
+    font-size: 18px;
+    font-family: 'Gotham-Medium';
+}
+
 
 /********** TEAM BUILDING ACTIVITIES **********/
 .filter-gallery .nav{
@@ -443,9 +499,6 @@ section.quote{
     background-color: var(--secondary);
     color: #FFFFFF;
 }
-.gallery .card img{
-    box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);
-}
 
 /********** OUR LOCATION **********/
 .find-your-tab{
@@ -463,6 +516,17 @@ section.quote{
 .find-your-tab .btn-find.find{
     background: #DA68C140;
 }
+#our-locations .card-img-box{
+    max-height: 160px;
+    box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+#our-locations .card-img-box img:hover{
+    transition: ease-in-out 1s;
+    transform: scale(1.30);
+}
+
 #our-locations .card.btn{
     padding: 0;
     text-align: left;
@@ -616,6 +680,9 @@ section.quote{
     font-size: 14px;
     color: var(--label-color);
 }
+.cursr-pointer{
+    cursor: pointer;
+}
 .color-primary{
     color: var(--primary);
     font-family: 'Gotham';
@@ -665,6 +732,10 @@ span.time{
 .payment-information .btn.btn-schedule{
     margin-top: 0px;
 }
+ul.terms-ul li{
+    list-style: disc;
+    color: var(--para-color);
+}
 
 
 /********** FITNESS TRAINING **********/
@@ -673,4 +744,21 @@ span.time{
 }
 #fitness-training-gallery .card-body,#fitness-training-gallery2 .card-body{
     padding: 16px 0px 0px 0px;
+}
+#fitness-training-gallery .card .card-img-box,#fitness-training-gallery2 .card .card-img-box{
+    max-height: 160px;
+    border-radius: 6px;
+    box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);
+    overflow: hidden;
+}
+#fitness-training-gallery .card img:hover,#fitness-training-gallery2 .card img:hover{
+    transition: ease-in-out 1s;
+    transform: scale(1.30);
+}
+#fitness-training-gallery .card h5,#fitness-training-gallery2 .card h5{
+    font-size: 18px;
+    font-family: 'Gotham-Medium';
+}
+#fitness-training-gallery .card p,#fitness-training-gallery2 .card p{
+    font-size: 16px;
 }

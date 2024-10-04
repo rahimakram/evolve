@@ -5,7 +5,17 @@
 <script src="{{ URL::asset('dist/js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ URL::asset('dist/owl-carousel/js/owl.carousel.min.js') }}"></script>
 <script src="{{ URL::asset('dist/js/script.js') }}"></script>
-
+<script src="{{ URL::asset('dist/animate/dist/wow.js') }}"></script>
+<script>
+    wow = new WOW(
+    {
+        boxClass:     'wow',      // default
+        animateClass: 'animated', // default
+        offset:       0          // default
+    }
+    )
+    wow.init();
+</script>
 <script>
     $('#change-password').on('submit',function(event){
         event.preventDefault();

@@ -4,12 +4,11 @@
 
 @section('content')
 
-
     <!-- BANNER -->
-    <section class="banner ptb-128">
+    <section class="banner ptb-128 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
                     <div class="my-breadcrumb">
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -21,7 +20,7 @@
                     </div>
                     <div class="mxw-800">
                         <h1>Sports Event Management</h1>
-                        <h6>We offer a turnkey solution to sports event management. From concept design, planning, delivery and event execution our team includes experience in all areas to ensure that your event is not only attractive and relevant to its target audience but also leaves a lasting memory for both those that attend and for the unfortunate ones that miss out.</h6>
+                        <p>We offer a turnkey solution to sports event management. From concept design, planning, delivery and event execution our team includes experience in all areas to ensure that your event is not only attractive and relevant to its target audience but also leaves a lasting memory for both those that attend and for the unfortunate ones that miss out.</p>
                     </div>
                 </div>
             </div>
@@ -30,7 +29,7 @@
 
 
     <!-- PARA-SECTION -->
-    <section class="our-fitness ptb-128">
+    <section class="our-fitness ptb-128 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -45,10 +44,10 @@
 
 
     <!-- ABOUT -->
-    <section class="tournament mb-64">
+    <section class="tournament ptb-64 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
         <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6">
+          <div class="row align-items-center bg-white">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
                 <div class="p64">
                     <h3>Msheireb Padel Tournament</h3>
                     <p>Evolve in association with Msheireb Properties the leading real estate developer in Qatar, known for its flagship project, Msheireb Downtown Doha. Msheireb properties new installation of an outdoor padel court in the courtyard of Msheireb museums was a grand occasion and the best way to highlight the new court was to organize a 16-team tournament across 5 days.<br><br>
@@ -56,7 +55,7 @@
                         Our sponsors Qatar Living broadcasted the event through their media channels and provided some amazing footage of the tournament highlights, the final was an exciting match lasting almost 2 hours where the champions were awarded a cheque from senior level executives from Msheireb Properties.</p>
                 </div>                
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
                 <div class="videos-box p64 ps-md-0">
                   <video autoplay="" loop="" controls="" 
                   poster="{{ URL::asset('dist/images/sports-management/Video1.png') }}">
@@ -66,8 +65,8 @@
             </div>
           </div>
 
-          <div class="row align-items-center mt-64">
-            <div class="col-md-6">
+          <div class="row align-items-center mt-64 bg-white">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
                 <div class="p64">
                     <h3>Muay Thai Roadshow 2016</h3>
                     <p>Evolve in association with the Ministry of Foreign Affairs of Thailand and the Royal Thai Embassy in Qatar and Grand Hyatt Doha brought the sport of Muay Thai to Doha in 2016. Leading Muay Thai fighters and Coaches came to Doha for a unique event open to the public for free.<br><br>
@@ -75,7 +74,7 @@
                       The event took place in the Ballroom of the Grand Hyatt Doha on Saturday 20th August and was well attend by representatives from Qatar Olympic Committee attended with a host of Ambassadors at the invitation of H.E. Soonthorn Chaiyindeepum, ambassador of Thailand to Qatar. Hosting the largest public event for Muay Thai in Doha’s history, the martial arts workshop conducted as part of the event included close to 100 participants with over 15 coaches.</p>
                 </div>                
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
               <div class="videos-box p64 ps-md-0">
                 <video autoplay="" loop="" controls="" 
                 poster="{{ URL::asset('dist/images/sports-management/Video1.png') }}">
@@ -85,8 +84,8 @@
             </div>
           </div>
 
-          <div class="row align-items-center mt-64">
-            <div class="col-md-6">
+          <div class="row align-items-center mt-64 bg-white">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
                 <div class="p64">
                     <h3>Qatar National Sports Day</h3>
                     <p>Are you aiming to host a sports day that goes above and beyond expectations? Let Evolve Wellness take the lead in creating an unforgettable experience for your participants!<br><br>
@@ -94,7 +93,7 @@
                       Our team is dedicated to ensuring that every aspect of your sports day is tailored to your needs and leaves a lasting impression on your attendees.</p>
                 </div>                
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
               <div class="videos-box p64 ps-md-0">
                 <video autoplay="" loop="" controls="" 
                 poster="{{ URL::asset('dist/images/sports-management/Video1.png') }}">
@@ -104,14 +103,14 @@
             </div>
           </div>
 
-          <div class="row align-items-center">
-            <div class="col-md-6">
+          <div class="row align-items-center mt-64 bg-white">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
                 <div class="p64">
                     <h3>Family Day Events</h3>
                     <p>Creating a fun-filled environment where families can connect, laugh and make unforgettable memories is something we love to do for our clients. Designing vibrant and engaging activities that caters for a variety of age groups is our main objective. Our understanding of how to incorporate local culture and taste allows us to craft unique and exciting activities, from thrilling games and captivating entertainment to wellness areas and cozy relaxation spots.</p>
                 </div>                
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
                 <div class="videos-box p64 ps-md-0">
                     <img src="{{ URL::asset('dist/images/sports-management/image-1.png') }}" class="img-fluid" alt="">
                 </div>
@@ -121,7 +120,7 @@
     </section>
 
 
-    <section class="quote ptb-128">
+    <section class="quote ptb-128 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -137,10 +136,10 @@
     </section>
 
 
-    <section class="ready-to-evolve ptb-128">
+    <section class="ready-to-evolve ptb-128 wow fadeInUp" data-wow-delay="300ms" data-wow-duration="2s">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-8 wow fadeInUp" data-wow-delay="600ms" data-wow-duration="2s">
             <div class="ready-to-evolve-content mxw-800 p64">
               <h3>Ready to Plan Your Next Event?</h3>
               <p>Give us a call, and let’s discuss how we can create an inspiring and motivating experience that will propel your team forward for the rest of the year.</p>
@@ -151,9 +150,10 @@
       </div>
     </section>
 
-
 @endsection
 
 @section('script')
-
+	
 @endsection
+
+	

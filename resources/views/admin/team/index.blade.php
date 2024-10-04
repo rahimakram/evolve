@@ -1,113 +1,143 @@
 @extends('admin.layouts.master')
 
-@section('title') @lang('translation.Dashboards') @endsection
+@section('title')
+    @lang('translation.Dashboards')
+@endsection
 @section('css')
-<!-- Sweet Alert-->
-<link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Sweet Alert-->
+    <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 
-@component('admin.components.breadcrumb')
-@slot('li_1') Dashboard @endslot
-@slot('title') Personal Team @endslot
-@endcomponent
+    @component('admin.components.breadcrumb')
+        @slot('li_1')
+            Dashboard
+        @endslot
+        @slot('title')
+            Personal Team
+        @endslot
+    @endcomponent
 
-<div class="row">
+    <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                    @session('success')
-                        <div class="alert alert-success" role="alert"> {{ $value }} </div>
-                    @endsession
+                        @session('success')
+                            <div class="alert alert-success" role="alert"> {{ $value }} </div>
+                        @endsession
                         <div class="col-sm-4">
                             <!-- <div class="search-box me-2 mb-2 d-inline-block">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
-                                    <i class="bx bx-search-alt search-icon"></i>
-                                </div>
-                            </div> -->
+                                                                                                                                <div class="position-relative">
+                                                                                                                                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
+                                                                                                                                    <i class="bx bx-search-alt search-icon"></i>
+                                                                                                                                </div>
+                                                                                                                            </div> -->
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
                                 <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#newContactModal"
+                                                                                                                                    class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
+                                                                                                                                        class="mdi mdi-plus me-1"></i> Create Team</button> -->
+                                <a href="{{ route('admin.teams.add') }}"
                                     class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                        class="mdi mdi-plus me-1"></i> Create Team</button> -->
-                                        <a href="{{route('teams.add')}}" class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
                                         class="mdi mdi-plus me-1"></i> Create Team</a>
                             </div>
                         </div><!-- end col-->
                     </div>
                     <!-- end row -->
                     <div class="table-responsive">
-                    <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100" id="userList-table">
-                      <thead class="table-light">
-                          <tr>
-                              <th scope="col" style="width: 40px;">Team Name</th>
-                              <th scope="col">Team Contact</th>
-                              <th scope="col">Team Email</th>
-                              <th scope="col">Specialisation</th>
-                              <th scope="col">Description</th>
-                              <th scope="col" style="width: 200px;">Status</th>
-                              <th scope="col" style="width: 200px;">Actions</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          @foreach ($trainers as $trainer)
-                              <tr>
-                                  <!-- Assuming 'name', 'contact', 'email', 'specialisation', and 'description' fields exist in the trainers, trainer_detail, or trainer_profile tables -->
-                                  <td>{{ $trainer->full_name }}</td> <!-- Trainer's name -->
-                                  <td>{{ $trainer->phone == "" ? 'N/A' : $trainer->phone }}</td> <!-- Trainer's contact -->
-                                  <td>{{ $trainer->email ?? 'N/A' }}</td> <!-- Trainer's email -->
-                                  <td>{{ $trainer->work_title ?? 'N/A' }}</td> <!-- Trainer's specialization -->
-                                  <td>{{ $trainer->bio_description ?? 'N/A' }}</td> <!-- Trainer's description -->
-                                  
-                                  <td>
-                                        @if($trainer->status == 'active')
-                                            <!-- Deactivate Button -->
-                                            <button onclick="confirmDeactivate({{ $trainer->trainer_id }})" type="button" class="btn btn-sm btn-danger waves-effect waves-light">
-                                                <i class="bx bx-block font-size-16 align-middle me-2"></i> Deactivate
-                                            </button>
-                                            <form style="display:none" id="deactivate_trainer_form_{{ $trainer->trainer_id }}" action="{{route('teams.deactivate',$trainer->trainer_id)}}" method="post">
-                                                @csrf
-                                            </form>
-                                        @else
-                                            <!-- Activate Button -->
-                                            <button onclick="confirmActivate({{ $trainer->trainer_id }})" type="button" class="btn btn-sm btn-success waves-effect waves-light">
-                                                <i class="bx bx-check-circle font-size-16 align-middle me-2"></i> Activate
-                                            </button>
-                                            <form style="display:none" id="activate_trainer_form_{{ $trainer->trainer_id }}" action="{{route('teams.activate',$trainer->trainer_id)}}" method="post">
-                                                @csrf
-                                            </form>
-                                        @endif
-                                    </td>
+                        <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100"
+                            id="userList-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" style="width: 40px;">Team Name</th>
+                                    <th scope="col">Team Contact</th>
+                                    <th scope="col">Team Email</th>
+                                    <th scope="col">Specialisation</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col" style="width: 200px;">Status</th>
+                                    <th scope="col" style="width: 200px;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($trainers as $trainer)
+                                    <tr>
+                                        <!-- Assuming 'name', 'contact', 'email', 'specialisation', and 'description' fields exist in the trainers, trainer_detail, or trainer_profile tables -->
+                                        <td>{{ $trainer->name }}</td> <!-- Trainer's name -->
+                                        <td>{{ $trainer->contact == '' ? 'N/A' : $trainer->phone }}</td>
+                                        <!-- Trainer's contact -->
+                                        <td>{{ $trainer->email ?? 'N/A' }}</td> <!-- Trainer's email -->
+                                        <td>
+                                            @if (!empty($trainer->specialization_names))
+                                                {{ implode(', ', $trainer->specialization_names->toArray()) }}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td> <!-- Trainer's specialization -->
+                                        <td>{{ $trainer->description ?? 'N/A' }}</td> <!-- Trainer's description -->
 
-                                  
-                                  <td>
-                                      <!-- Action Buttons: Edit & Delete -->
-                                      <a href="{{route('teams.edit',$trainer->trainer_id)}}" class="btn btn-sm btn-success waves-effect waves-light">
-                                          <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
-                                        </a>
-                                      <button type="button" onclick="confirmDelete({{ $trainer->trainer_id }})" class="btn btn-sm btn-danger waves-effect waves-light">
-                                          <i class="bx bx-trash font-size-16 align-middle me-2"></i> Delete
-                                        </button>
-                                        <form style="display:hidden" id="delete_trainer_form_{{$trainer->trainer_id}}" action="{{route('teams.delete',$trainer->trainer_id)}}" method="post">
-                                            @csrf
-                                        </form>
-                                  </td>
-                              </tr>
-                          @endforeach
-                      </tbody>
-                  </table>
+                                        <td>
+                                            @if ($trainer->status == 'Y')
+                                                <!-- Deactivate Button -->
+                                                <button onclick="confirmDeactivate({{ $trainer->u_id }})" type="button"
+                                                    class="btn btn-sm btn-danger waves-effect waves-light">
+                                                    <i class="bx bx-block font-size-16 align-middle me-2"></i> Deactivate
+                                                </button>
+                                                <form style="display:none" id="deactivate_trainer_form_{{ $trainer->u_id }}"
+                                                    action="{{ route('admin.teams.deactivate', $trainer->u_id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                </form>
+                                            @else
+                                                <!-- Activate Button -->
+                                                <button onclick="confirmActivate({{ $trainer->u_id }})" type="button"
+                                                    class="btn btn-sm btn-success waves-effect waves-light">
+                                                    <i class="bx bx-check-circle font-size-16 align-middle me-2"></i>
+                                                    Activate
+                                                </button>
+                                                <form style="display:none" id="activate_trainer_form_{{ $trainer->u_id }}"
+                                                    action="{{ route('admin.teams.activate', $trainer->u_id) }}"
+                                                    method="post">
+                                                    @csrf
+                                                </form>
+                                            @endif
+                                        </td>
+
+
+                                        <td>
+                                            <!-- Action Buttons: Edit & Delete -->
+                                            <a href="{{ route('admin.teams.edit', $trainer->u_id) }}"
+                                                class="btn btn-sm btn-success waves-effect waves-light">
+                                                <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
+                                            </a>
+                                            <button type="button" onclick="confirmDelete({{ $trainer->u_id }})"
+                                                class="btn btn-sm btn-danger waves-effect waves-light">
+                                                <i class="bx bx-trash font-size-16 align-middle me-2"></i> Delete
+                                            </button>
+                                            <form style="display:hidden" id="delete_trainer_form_{{ $trainer->u_id }}"
+                                                action="{{ route('admin.teams.delete', $trainer->u_id) }}" method="post">
+                                                @csrf
+                                                {{-- @method('DELETE') --}}
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">No data available</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
 
 
                         <!-- end table -->
                     </div>
                     <!-- Pagination Links -->
-                      <div class="d-flex justify-content-end mt-4">
-                      {{ $trainers->onEachSide(1)->links('pagination::bootstrap-5') }}
-                      <!-- Displays pagination controls -->
-                      </div>
+                    <div class="d-flex justify-content-end mt-4">
+                        {{ $trainers->onEachSide(1)->links('pagination::bootstrap-5') }}
+                        <!-- Displays pagination controls -->
+                    </div>
                     <!-- end table responsive -->
                 </div>
             </div>
@@ -144,16 +174,16 @@
                                         </div>
                                         <div class="avatar-lg">
                                             <div class="avatar-title bg-light rounded-circle">
-                                                <img src="{{ URL::asset('build/images/users/user-dummy-img.jpg') }}" id="member-img"
-                                                    class="avatar-md rounded-circle h-auto" />
+                                                <img src="{{ URL::asset('build/images/users/user-dummy-img.jpg') }}"
+                                                    id="member-img" class="avatar-md rounded-circle h-auto" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="username-input" class="form-label">User Name</label>
-                                    <input type="text" id="username-input" class="form-control" placeholder="Enter name"
-                                        required />
+                                    <input type="text" id="username-input" class="form-control"
+                                        placeholder="Enter name" required />
                                     <div class="invalid-feedback">Please enter a name.</div>
                                 </div>
                                 <div class="mb-3">
@@ -205,64 +235,62 @@
     <!-- end newContactModal -->
 
 
-<!-- end row -->
+    <!-- end row -->
 
 @endsection
 @section('script')
+    <!-- Sweet Alerts js -->
+    <script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
-<!-- Sweet Alerts js -->
-<script src="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script>
+        function confirmDelete(trainerId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user confirms, submit the form
+                    document.getElementById('delete_trainer_form_' + trainerId).submit();
+                }
+            })
+        }
 
-<script>
-    function confirmDelete(trainerId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If the user confirms, submit the form
-                document.getElementById('delete_trainer_form_' + trainerId).submit();
-            }
-        })
-    }
+        function confirmDeactivate(trainerId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, deactivate it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user confirms, submit the form
+                    document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+                }
+            })
+        }
 
-    function confirmDeactivate(trainerId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, deactivate it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If the user confirms, submit the form
-                document.getElementById('deactivate_trainer_form_' + trainerId).submit();
-            }
-        })
-    }
-
-    function confirmActivate(trainerId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to activate this trainer!",
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, activate it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('activate_trainer_form_' + trainerId).submit();
-            }
-        })
-    }
-</script>
-
+        function confirmActivate(trainerId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to activate this trainer!",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, activate it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('activate_trainer_form_' + trainerId).submit();
+                }
+            })
+        }
+    </script>
 @endsection

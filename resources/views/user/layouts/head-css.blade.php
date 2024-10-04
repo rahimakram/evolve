@@ -6,3 +6,4 @@
 
 <link rel="stylesheet" href="{{ URL::asset('dist/css/style.css') }}">
 <link rel="stylesheet" href="{{ URL::asset('dist/css/responsive.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('dist/animate/css/libs/animate.min.css') }}">
