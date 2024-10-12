@@ -69,20 +69,38 @@
                             <div class="col-md-6">
                                 <div class="mt-3">
                                     <label for="logo" class="form-label">Logo</label>
-                                    <input class="form-control" type="file" id="logo" name="logo">
+                                    <input class="form-control" type="file" id="logo" name="logo"
+                                        accept="image/*" onchange="previewLogo(event)">
                                     @error('logo')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <!-- Show current image if available -->
+                                @if ($location->logo)
+                                    <img id="logo-preview" src="{{ asset('storage/' . $location->logo) }}"
+                                        alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                @else
+                                    <img id="logo-preview" class="rounded-circle avatar-xl mt-3" src="#"
+                                        alt="Logo Preview" style="display: none;" />
+                                @endif
                             </div>
                             <div class="col-md-6">
                                 <div class="mt-3">
                                     <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="formFile" name="image">
+                                    <input class="form-control" type="file" id="formFile" name="image"
+                                        accept="image/*" onchange="previewImage(event)">
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <!-- Show current image if available -->
+                                @if ($location->image)
+                                    <img id="image-preview" src="{{ asset('storage/' . $location->image) }}"
+                                        alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                @else
+                                    <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
+                                        alt="Image Preview" style="display: none;" />
+                                @endif
                             </div>
                         </div>
 
@@ -116,10 +134,10 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea required="" name="description" class="form-control" rows="3" id="description"
+                                    <label for="description-editor" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" rows="3" id="description-editor"
                                         placeholder="Enter Your description">{{ old('description') ? old('description') : $location->description }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
@@ -127,6 +145,10 @@
                                 </div>
                             </div>
 
+
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address</label>
@@ -159,5 +181,59 @@
 
     <!-- Form file upload init js -->
     <!-- <script src="{{ URL::asset('build/js/pages/form-file-upload.init.js') }}"></script> -->
-    <script></script>
+
+    <!--tinymce js-->
+    <script src="{{ URL::asset('build/libs/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ URL::asset('build/js/pages/form-editor.init.js') }}"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#description-editor', // Match the ID of the textarea
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                                                                                                                                                alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                bullist numlist outdent indent | removeformat | help'
+        });
+    </script>
+    <script>
+        function previewLogo(event) {
+            const imagePreview = document.getElementById('logo-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Show the image preview
+                }
+
+                reader.readAsDataURL(file); // Convert the file into a data URL
+            }
+        }
+
+        function previewImage(event) {
+            const imagePreview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Show the image preview
+                }
+
+                reader.readAsDataURL(file); // Convert the file into a data URL
+            }
+        }
+    </script>
 @endsection

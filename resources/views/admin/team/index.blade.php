@@ -28,17 +28,17 @@
                         @endsession
                         <div class="col-sm-4">
                             <!-- <div class="search-box me-2 mb-2 d-inline-block">
-                                                                                                                                <div class="position-relative">
-                                                                                                                                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
-                                                                                                                                    <i class="bx bx-search-alt search-icon"></i>
-                                                                                                                                </div>
-                                                                                                                            </div> -->
+                                                                                                                                                                                                                                        <div class="position-relative">
+                                                                                                                                                                                                                                            <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
+                                                                                                                                                                                                                                            <i class="bx bx-search-alt search-icon"></i>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div> -->
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
                                 <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#newContactModal"
-                                                                                                                                    class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                                                                                                                        class="mdi mdi-plus me-1"></i> Create Team</button> -->
+                                                                                                                                                                                                                                            class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
+                                                                                                                                                                                                                                                class="mdi mdi-plus me-1"></i> Create Team</button> -->
                                 <a href="{{ route('admin.teams.add') }}"
                                     class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
                                         class="mdi mdi-plus me-1"></i> Create Team</a>
@@ -51,11 +51,13 @@
                             id="userList-table">
                             <thead class="table-light">
                                 <tr>
-                                    <th scope="col" style="width: 40px;">Team Name</th>
-                                    <th scope="col">Team Contact</th>
-                                    <th scope="col">Team Email</th>
+                                    <th scope="col">Sr No.</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col" style="width: 40px;">Name</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Specialisation</th>
-                                    <th scope="col">Description</th>
+                                    {{-- <th scope="col">Description</th> --}}
                                     <th scope="col" style="width: 200px;">Status</th>
                                     <th scope="col" style="width: 200px;">Actions</th>
                                 </tr>
@@ -63,34 +65,34 @@
                             <tbody>
                                 @forelse ($trainers as $trainer)
                                     <tr>
-                                        <!-- Assuming 'name', 'contact', 'email', 'specialisation', and 'description' fields exist in the trainers, trainer_detail, or trainer_profile tables -->
-                                        <td>{{ $trainer->name }}</td> <!-- Trainer's name -->
-                                        <td>{{ $trainer->contact == '' ? 'N/A' : $trainer->phone }}</td>
-                                        <!-- Trainer's contact -->
-                                        <td>{{ $trainer->email ?? 'N/A' }}</td> <!-- Trainer's email -->
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><img class="rounded-circle header-profile-user"
+                                                src="{{ URL::asset('storage/' . $trainer->avatar) }}" alt="Header Avatar">
+                                        </td>
+                                        <td>{{ $trainer->name }}</td>
+                                        <td>{{ $trainer->contact ? $trainer->contact : 'N/A' }}</td>
+                                        <td>{{ $trainer->email ?? 'N/A' }}</td>
                                         <td>
                                             @if (!empty($trainer->specialization_names))
                                                 {{ implode(', ', $trainer->specialization_names->toArray()) }}
                                             @else
                                                 N/A
                                             @endif
-                                        </td> <!-- Trainer's specialization -->
-                                        <td>{{ $trainer->description ?? 'N/A' }}</td> <!-- Trainer's description -->
+                                        </td>
 
                                         <td>
                                             @if ($trainer->status == 'Y')
-                                                <!-- Deactivate Button -->
                                                 <button onclick="confirmDeactivate({{ $trainer->u_id }})" type="button"
                                                     class="btn btn-sm btn-danger waves-effect waves-light">
                                                     <i class="bx bx-block font-size-16 align-middle me-2"></i> Deactivate
                                                 </button>
-                                                <form style="display:none" id="deactivate_trainer_form_{{ $trainer->u_id }}"
+                                                <form style="display:none"
+                                                    id="deactivate_trainer_form_{{ $trainer->u_id }}"
                                                     action="{{ route('admin.teams.deactivate', $trainer->u_id) }}"
                                                     method="post">
                                                     @csrf
                                                 </form>
                                             @else
-                                                <!-- Activate Button -->
                                                 <button onclick="confirmActivate({{ $trainer->u_id }})" type="button"
                                                     class="btn btn-sm btn-success waves-effect waves-light">
                                                     <i class="bx bx-check-circle font-size-16 align-middle me-2"></i>
@@ -106,7 +108,6 @@
 
 
                                         <td>
-                                            <!-- Action Buttons: Edit & Delete -->
                                             <a href="{{ route('admin.teams.edit', $trainer->u_id) }}"
                                                 class="btn btn-sm btn-success waves-effect waves-light">
                                                 <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
@@ -118,7 +119,6 @@
                                             <form style="display:hidden" id="delete_trainer_form_{{ $trainer->u_id }}"
                                                 action="{{ route('admin.teams.delete', $trainer->u_id) }}" method="post">
                                                 @csrf
-                                                {{-- @method('DELETE') --}}
                                             </form>
                                         </td>
                                     </tr>
@@ -129,16 +129,11 @@
                                 @endforelse
                             </tbody>
                         </table>
-
-
-                        <!-- end table -->
                     </div>
                     <!-- Pagination Links -->
                     <div class="d-flex justify-content-end mt-4">
                         {{ $trainers->onEachSide(1)->links('pagination::bootstrap-5') }}
-                        <!-- Displays pagination controls -->
                     </div>
-                    <!-- end table responsive -->
                 </div>
             </div>
         </div>

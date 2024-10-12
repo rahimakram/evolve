@@ -103,96 +103,125 @@
                             <div class="col-md-6">
                                 <div class="mt-3">
                                     <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="formFile" name="image">
+                                    <input class="form-control" type="file" id="formFile" name="image"
+                                        accept="image/*" onchange="previewImage(event)">
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <!-- Show current image if available -->
+                                @if ($trainer->avatar)
+                                    <img id="image-preview" src="{{ asset('storage/' . $trainer->avatar) }}"
+                                        alt="Current Image" class="rounded-circle mt-3 avatar-xl" />
+                                @else
+                                    <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
+                                        alt="Image Preview" style="display: none;" />
+                                @endif
                             </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea required="" name="description" class="form-control" rows="3" id="description"
+                                    <label for="special_focus_area" class="form-label">Special Focus Area</label>
+                                    <textarea required="" name="special_focus_area" class="form-control" rows="3" id="special_focus_area"
+                                        placeholder="Enter Your Special Focus Area">{{ old('special_focus_area') ? old('special_focus_area') : jsonToCommaSeparatedString($trainer->special_focus_area) }}</textarea>
+                                    @error('special_focus_area')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+                        {{-- @php
+                            function jsonToCommaSeparatedString($json)
+                            {
+                                $array = json_decode($json, true); // Decode JSON to an array
+                                return $array ? implode(', ', $array) : ''; // Convert to comma-separated string
+                            }
+                        @endphp --}}
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="description-editor" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" rows="3" id="description-editor"
                                         placeholder="Enter Your Description">{{ old('description') ? old('description') : $trainer->description }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
+
                         </div>
 
-                        <div class="row mt-3">
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="special_focus_area" class="form-label">Special Focus Area</label>
-                                    <textarea required="" name="special_focus_area" class="form-control" rows="3" id="special_focus_area"
-                                        placeholder="Enter Your Special Focus Area">{{ old('special_focus_area') ? old('special_focus_area') : $trainer->special_focus_area }}</textarea>
-                                    @error('special_focus_area')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="experience" class="form-label">Experience</label>
                                     <textarea required="" name="experience" class="form-control" rows="3" id="experience"
-                                        placeholder="Enter Your Experience">{{ old('experience') ? old('experience') : $trainer->experience }}</textarea>
+                                        placeholder="Enter Your Experience">{{ old('experience') ? old('experience') : jsonToCommaSeparatedString($trainer->experience) }}</textarea>
                                     @error('experience')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="certification" class="form-label">Certification</label>
                                     <textarea required="" name="certification" class="form-control" rows="3" id="certification"
-                                        placeholder="Enter Your Certification">{{ old('certification') ? old('certification') : $trainer->certifications }}</textarea>
+                                        placeholder="Enter Your Certification">{{ old('certification') ? old('certification') : jsonToCommaSeparatedString($trainer->certifications) }}</textarea>
                                     @error('certification')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="classes" class="form-label">Classes</label>
                                     <textarea required="" name="classes" class="form-control" rows="3" id="classes"
-                                        placeholder="Enter Your Classes">{{ old('classes') ? old('classes') : $trainer->classes }}</textarea>
+                                        placeholder="Enter Your Classes">{{ old('classes') ? old('classes') : jsonToCommaSeparatedString($trainer->classes) }}</textarea>
                                     @error('classes')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="education" class="form-label">Education</label>
                                     <textarea required="" name="education" class="form-control" rows="3" id="education"
-                                        placeholder="Enter Your Education">{{ old('education') ? old('education') : $trainer->education }}</textarea>
+                                        placeholder="Enter Your Education">{{ old('education') ? old('education') : jsonToCommaSeparatedString($trainer->education) }}</textarea>
                                     @error('education')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="row" style="align-items: baseline">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="languages" class="form-label">Languages</label>
                                     <textarea required="" name="languages" class="form-control" rows="3" id="languages"
-                                        placeholder="Enter Your Languages">{{ old('languages') ? old('languages') : $trainer->languages }}</textarea>
+                                        placeholder="Enter Your Languages">{{ old('languages') ? old('languages') : jsonToCommaSeparatedString($trainer->languages) }}</textarea>
                                     @error('languages')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="example-date-input" class="col-md-2 col-form-label">DOB</label>
 
+                                    <input class="form-control" type="date" name="dob"
+                                        value="{{ old('dob') ? old('dob') : \Carbon\Carbon::parse($trainer->dob)->format('Y-m-d') }}"
+                                        id="example-date-input">
+                                </div>
+                            </div>
+                        </div>
 
 
 
@@ -217,5 +246,43 @@
     <!-- <script src="{{ URL::asset('build/js/pages/form-file-upload.init.js') }}"></script> -->
     <!-- form advanced init -->
     <script src="{{ URL::asset('build/js/pages/form-advanced.init.js') }}"></script>
-    <script></script>
+
+    <!--tinymce js-->
+    <script src="{{ URL::asset('build/libs/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ URL::asset('build/js/pages/form-editor.init.js') }}"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#description-editor', // Match the ID of the textarea
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                                                                                                                                                    alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                    bullist numlist outdent indent | removeformat | help'
+        });
+    </script>
+    <script>
+        function previewImage(event) {
+            const imagePreview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Show the image preview
+                }
+
+                reader.readAsDataURL(file); // Convert the file into a data URL
+            }
+        }
+    </script>
 @endsection

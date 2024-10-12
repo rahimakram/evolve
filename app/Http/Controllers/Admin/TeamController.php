@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Trainer;
 use App\Models\Admin\TrainerDetail;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class TeamController extends Controller
 {
@@ -26,7 +27,7 @@ class TeamController extends Controller
                 'user_details.*',
                 // 'trainer_profile.id as profile_id',
                 // 'trainer_profile.*'
-            )
+            )->where('users.role', '!=', 'admin')
             // ->where('user.is_deleted', '0')
             ->orderBy('users.name', 'asc')
             ->paginate(10);
@@ -79,6 +80,8 @@ class TeamController extends Controller
             'languages' => 'required',
         ]);
 
+        // Ensure the date is in the correct format
+        // dd("dob", $dob);
         $imagePath = "";
 
         $user = new User();
@@ -86,7 +89,8 @@ class TeamController extends Controller
         $user->email = $request->trainer_email;
         $user->email_verified_at = now();
         $user->password = Hash::make($request->password);
-        $user->dob = now();
+        $dob = Carbon::createFromFormat('Y-m-d', $request->dob); // If you're getting date in the format 'YYYY-MM-DD'
+        $user->dob = $dob;
         $user->role = 'instructor';
         // $user->remember_token = "checking";
         // $user->avatar = null;
@@ -111,12 +115,12 @@ class TeamController extends Controller
             $user_details->contact = $request->trainer_contact;
             $user_details->description = $request->description;
             $user_details->specialization = implode(',', $request->specialisation);
-            $user_details->special_focus_area = $request->special_focus_area;
-            $user_details->classes = $request->classes;
-            $user_details->certifications = $request->certification;
-            $user_details->languages = $request->languages;
-            $user_details->experience = $request->experience;
-            $user_details->education = $request->education;
+            $user_details->special_focus_area = json_encode(explode('|', $request->special_focus_area));
+            $user_details->classes = json_encode(explode('|', $request->classes));
+            $user_details->certifications = json_encode(explode('|', $request->certification));
+            $user_details->languages = json_encode(explode('|', $request->languages));
+            $user_details->experience = json_encode(explode('|', $request->experience));
+            $user_details->education = json_encode(explode('|', $request->education));
             $user_details_save = $user_details->save();
 
             return redirect()->route('admin.teams.index')->with('success', 'Instructor saved successfully.');
@@ -151,8 +155,6 @@ class TeamController extends Controller
             'trainer_name' => 'required',
             'trainer_contact' => 'required',
             'trainer_email' => 'required|email',
-            // 'password' => 'required|min:8|confirmed',
-            // 'specialisation'=>'required',
             'image' => 'mimes:jpeg,jpg,png,webp',
             'description' => 'required',
             'special_focus_area' => 'required',
@@ -187,23 +189,19 @@ class TeamController extends Controller
                 // $existingUser->avatar = $imagePath;
                 // $existingUser->featured_image = $imagePath;
                 // $existingUser->update();
-            }
-            if ($user->avatar) {
                 $user->avatar = $imagePath;
                 $user->update();
             }
 
-
-
             $userDetails = UserDetail::where('user_id', $id)->first();
             // $userDetails->trainer = $user->id;
             $userDetails->specialization = implode(',', $request->specialisation);
-            $userDetails->special_focus_area = $request->special_focus_area;
-            $userDetails->classes = $request->classes;
-            $userDetails->certifications = $request->certification;
-            $userDetails->languages = $request->languages;
-            $userDetails->experience = $request->experience;
-            $userDetails->education = $request->education;
+            $userDetails->special_focus_area = json_encode(explode('|', $request->special_focus_area));
+            $userDetails->classes = json_encode(explode('|', $request->classes));
+            $userDetails->certifications = json_encode(explode('|', $request->certification));
+            $userDetails->languages = json_encode(explode('|', $request->languages));
+            $userDetails->experience = json_encode(explode('|', $request->experience));
+            $userDetails->education = json_encode(explode('|', $request->education));
             $userDetails->description = $request->description;
             $userDetailsUpdated = $userDetails->update();
 

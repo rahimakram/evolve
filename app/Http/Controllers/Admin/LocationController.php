@@ -126,6 +126,7 @@ class LocationController extends Controller
             $image = $request->file('image');
             $imageName = $image->getClientOriginalName();
             $imagePath = $image->storeAs('uploads/location/' . $id, $imageName, 'public');
+            $user->image = $imagePath;
         }
 
         if ($request->hasFile('logo')) {
@@ -135,6 +136,7 @@ class LocationController extends Controller
             $logo = $request->file('logo');
             $logoName = $logo->getClientOriginalName();
             $logoPath = $logo->storeAs('uploads/location/' . $id, $logoName, 'public');
+            $user->logo = $logoPath;
         }
 
         $user_is_updated = $user->update();

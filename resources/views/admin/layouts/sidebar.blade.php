@@ -89,75 +89,57 @@
 
                 <!-- <li class="menu-title" key="t-apps">@lang('translation.Apps')</li> -->
 
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="bx bx-home"></i>
                         <span key="t-dashboards">@lang('translation.Home')</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
+                </li> --}}
+
+                <li>
+                    <a href="{{ route('admin.timeline.index') }}" class="waves-effect">
+                        <i class="far fa-calendar-alt"></i>
+                        <span key="t-dashboards">Timeline</span>
+                    </a>
                 </li>
 
                 <li>
                     <a href="{{ route('admin.location.index') }}" class="waves-effect">
-                        <i class="bx bx-home"></i>
-                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        {{-- <i class="bx bx-home"></i> --}}
+                        <i class="fas fa-search-location"></i>
                         <span key="t-dashboards">Location</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
                 </li>
 
                 <li>
                     <a href="{{ route('admin.teams.index') }}" class="waves-effect">
-                        <i class="bx bx-home"></i>
-                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        {{-- <i class="bx bx-home"></i> --}}
+                        <i class="fas fa-users"></i>
                         <span key="t-dashboards">Teams / Instructor</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
-                </li>
-
-                <li>
-                    <a href="{{ route('admin.profession.index') }}" class="waves-effect">
-                        <i class="bx bx-home"></i>
-                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
-                        <span key="t-dashboards">Profession</span>
-                    </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
                 </li>
 
                 <li>
                     <a href="{{ route('admin.activity.index') }}" class="waves-effect">
-                        <i class="bx bx-home"></i>
-                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <i class="fas fa-network-wired"></i>
                         <span key="t-dashboards">Activity</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
                 </li>
 
                 <li>
                     <a href="{{ route('admin.specialization.index') }}" class="waves-effect">
-                        <i class="bx bx-home"></i>
-                        <!-- <span key="t-dashboards">@lang('translation.Home')</span> -->
+                        <i class="fas fa-user-graduate"></i>
                         <span key="t-dashboards">Specializations</span>
                     </a>
-                    <!-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="calendar" key="t-tui-calendar">@lang('translation.TUI_Calendar')</a></li>
-                        <li><a href="calendar-full" key="t-full-calendar">@lang('translation.Full_Calendar')</a></li>
-                    </ul> -->
+                </li>
+
+                <li class="menu-title" key="t-components">Orders And Membership</li>
+
+                <li>
+                    <a href="{{ route('admin.specialization.index') }}" class="waves-effect">
+                        <i class="far fa-credit-card"></i>
+                        <span key="t-dashboards">Payment Detail</span>
+                    </a>
                 </li>
 
                 <!-- <li>

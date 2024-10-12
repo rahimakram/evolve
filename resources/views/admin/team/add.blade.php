@@ -103,25 +103,15 @@
                             <div class="col-md-6">
                                 <div class="mt-3">
                                     <label for="formFile" class="form-label">Image</label>
-                                    <input class="form-control" type="file" id="formFile" name="image">
+                                    <input class="form-control" type="file" id="formFile" name="image"
+                                        accept="image/*" onchange="previewImage(event)">
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
+                                    alt="Image Preview" style="display: none;">
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea required="" name="description" class="form-control" rows="3" id="description"
-                                        placeholder="Enter Your Description">{{ old('description') }}</textarea>
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
 
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -133,6 +123,21 @@
                                     @enderror
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="description-editor" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" rows="3" id="description-editor"
+                                        placeholder="Enter Your Description">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="experience" class="form-label">Experience</label>
@@ -143,10 +148,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="certification" class="form-label">Certification</label>
@@ -157,6 +158,11 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
+
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="classes" class="form-label">Classes</label>
@@ -167,10 +173,6 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="education" class="form-label">Education</label>
@@ -181,6 +183,11 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row" style="align-items: baseline">
+
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="languages" class="form-label">Languages</label>
@@ -189,6 +196,15 @@
                                     @error('languages')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="example-date-input" class="col-md-2 col-form-label">DOB</label>
+
+                                    <input class="form-control" type="date" name="dob"
+                                        value="{{ old('dob') }}" id="example-date-input">
                                 </div>
                             </div>
                         </div>
@@ -217,9 +233,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <!-- <textarea required="" class="form-control" rows="3" style="height: 17px;"></textarea> -->
                         <div>
                             <button type="submit" class="btn btn-primary w-md">Submit</button>
@@ -242,5 +255,44 @@
     <script src="{{ URL::asset('build/libs/select2/js/select2.min.js') }}"></script>
     <!-- form advanced init -->
     <script src="{{ URL::asset('build/js/pages/form-advanced.init.js') }}"></script>
-    <script></script>
+
+    <!--tinymce js-->
+    <script src="{{ URL::asset('build/libs/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- init js -->
+    <script src="{{ URL::asset('build/js/pages/form-editor.init.js') }}"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#description-editor', // Match the ID of the textarea
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                                                                                                                                alignleft aligncenter alignright alignjustify | \
+                                                                                                                                bullist numlist outdent indent | removeformat | help'
+        });
+    </script>
+
+    <script>
+        function previewImage(event) {
+            const imagePreview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block'; // Show the image preview
+                }
+
+                reader.readAsDataURL(file); // Convert the file into a data URL
+            }
+        }
+    </script>
 @endsection
