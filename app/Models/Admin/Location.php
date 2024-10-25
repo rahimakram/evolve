@@ -17,7 +17,9 @@ class Location extends Model
         'logo',
         'image',
         'video_link',
-        'map_link',
+        'latitude',
+        'longitude',
+        // 'map_link',
         'description',
     ];
 }

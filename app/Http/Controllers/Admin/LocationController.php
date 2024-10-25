@@ -15,17 +15,13 @@ class LocationController extends Controller
         $locations = Location::orderBy('name', 'asc')
             ->paginate(10);
 
-        // Process specialization names
         foreach ($locations as $activity) {
             if (!empty($activity->activites)) {
-                // Convert the comma-separated values into an array
                 $activityIds = explode(',', $activity->activites);
 
-                // Fetch the specialization names from the database
                 $activityNames = ActivityCategory::whereIn('id', $activityIds)
                     ->pluck('activity_name');
 
-                // Assign the names back to the trainer object
                 $activity->activity_names = $activityNames;
             }
         }
@@ -43,11 +39,15 @@ class LocationController extends Controller
     {
         $this->validate($request, [
             'location_name' => 'required',
-            'image' => 'mimes:jpeg,jpg,png,webp',
-            'logo' => 'mimes:jpeg,jpg,png,webp',
+            'image' => 'mimes:jpeg,jpg,png,webp|max:1024',
+            'logo' => 'mimes:jpeg,jpg,png,webp|max:1024',
             'activities' => 'required',
             'description' => 'required',
-            'address' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.',
+            'logo.max' => 'The logo may not be greater than 1MB.',
         ]);
 
         $imagePath = "";
@@ -59,7 +59,8 @@ class LocationController extends Controller
         $user->activites = implode(',', $request->activities);
         $user->description = $request->description;
         $user->video_link = $request->video_link ? $request->video_link : null;
-        $user->map_link = $request->map_link ? $request->map_link : null;
+        $user->latitude = $request->latitude ? $request->latitude : null;
+        $user->longitude = $request->longitude ? $request->longitude : null;
         $user->status = 'Y';
 
         $user->save();
@@ -100,11 +101,16 @@ class LocationController extends Controller
     {
         $this->validate($request, [
             'location_name' => 'required',
-            'image' => 'mimes:jpeg,jpg,png,webp',
-            'logo' => 'mimes:jpeg,jpg,png,webp',
+            'image' => 'mimes:jpeg,jpg,png,webp|max:1024',
+            'logo' => 'mimes:jpeg,jpg,png,webp|max:1024',
             'activities' => 'required',
             'description' => 'required',
             'address' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.',
+            'logo.max' => 'The logo may not be greater than 1MB.',
         ]);
 
         $imagePath = '';
@@ -116,7 +122,9 @@ class LocationController extends Controller
         $user->activites = implode(',', $request->activities);
         $user->description = $request->description;
         $user->video_link = $request->video_link ? $request->video_link : null;
-        $user->map_link = $request->map_link ? $request->map_link : null;
+        // $user->map_link = $request->map_link ? $request->map_link : null;
+        $user->latitude = $request->latitude ? $request->latitude : null;
+        $user->longitude = $request->longitude ? $request->longitude : null;
         $user->status = 'Y';
 
         if ($request->hasFile('image')) {
@@ -160,7 +168,7 @@ class LocationController extends Controller
         $is_user_updated = $user->update();
 
         if ($is_user_updated) {
-            return redirect()->route('admin.location.index')->with('success', 'Location activated successfully');
+            return redirect()->route('admin.location.index')->with('success', 'Status is Active');
         }
     }
 
@@ -171,7 +179,7 @@ class LocationController extends Controller
         $is_user_updated = $user->update();
 
         if ($is_user_updated) {
-            return redirect()->route('admin.location.index')->with('success', 'Location deactivated successfully');
+            return redirect()->route('admin.location.index')->with('success', 'Status is Deactive');
         }
     }
 }

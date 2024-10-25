@@ -50,7 +50,54 @@ class TimelineController extends Controller
         $locations = Location::where('status', 'Y')->get();
         $instructors = User::where('status', 'Y')->where('role', 'instructor')->get();
         // $specializations = SpecializationCategory::where('status', 'Y')->get();
-        return view('admin.timeline.add', compact('locations', 'instructors'));
+        // $today = Carbon::now();
+        // // $today = Carbon::create(2024, 10, 28);
+        // // dd($today);
+        // $currentMonth = $today->month; // Current month
+        // $remainingDays = [];
+
+        // // Loop through the remaining days in the week from today
+        // for ($i = 1; $i < 7; $i++) {
+        //     $date = $today->copy()->addDays($i); // Create a new date for each subsequent day
+
+        //     // If the date is still within the current month
+        //     if ($date->month == $currentMonth) {
+        //         $remainingDays[] = $date->format('l'); // Add the day name to the array (Monday, Tuesday, etc.)
+        //     } else {
+        //         break; // Stop if the date goes into the next month
+        //     }
+        // }
+
+        $today = Carbon::now();
+        // $today = Carbon::create(2024, 10, 28); // Static date: October 28, 2024
+        $currentMonth = $today->month; // Current month
+        $remainingDays = [];
+        $todayDayName = $today->format('l'); // Get today's day name (e.g., "Monday")
+
+        $dayAlreadySkipped = false; // Flag to check if we've already skipped today's day
+
+        // Loop through the next 6 days
+        for ($i = 0; $i <= 7; $i++) {
+            $date = $today->copy()->addDays($i); // Create a new date for each subsequent day
+
+            if ($date->month == $currentMonth) {
+                $dayName = $date->format('l');
+
+                // If it's today's day name and we haven't skipped it yet, skip it
+                if ($dayName == $todayDayName && !$dayAlreadySkipped) {
+                    $dayAlreadySkipped = true; // Mark that we've skipped today's day once
+                    continue; // Skip this iteration (today's day)
+                }
+
+                // Add the day name to the array (Monday, Tuesday, etc.)
+                $remainingDays[] = $dayName;
+            } else {
+                break; // Stop if the date goes into the next month
+            }
+        }
+
+        // dd($remainingDays);
+        return view('admin.timeline.add', compact('locations', 'instructors', 'remainingDays'));
     }
 
     public function getLocationActivities(Request $request)
@@ -75,74 +122,206 @@ class TimelineController extends Controller
     }
 
 
+    // public function create(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'title' => 'required',
+    //         'location' => 'required',
+    //         'instructor' => 'required',
+    //         'activities' => 'required',
+    //         'image' => 'required | mimes:jpeg,jpg,png,webp',
+    //         'description' => 'required',
+    //         // 'date' => 'required',
+    //         'days' => 'required|array',
+    //         'start_time' => 'required',
+    //         'end_time' => 'required',
+    //     ]);
+
+    //     $imagePath = "";
+
+    //     $date = Carbon::createFromFormat('Y-m-d', $request->date);
+    //     $start_time = Carbon::parse($request->start_time)->format('H:i:s');
+    //     $end_time = Carbon::parse($request->end_time)->format('H:i:s');
+    //     $location_id = (int) $request->location;
+
+    //     $existingTimeline = Timeline::where('location_id', $location_id)
+    //         ->where('date', $date->format('Y-m-d'))
+    //         ->where(function ($query) use ($start_time, $end_time) {
+    //             $query->whereBetween('start_time', [$start_time, $end_time])
+    //                 ->orWhereBetween('end_time', [$start_time, $end_time])
+    //                 ->orWhere(function ($query) use ($start_time, $end_time) {
+    //                     $query->where('start_time', '<=', $start_time)
+    //                         ->where('end_time', '>=', $end_time);
+    //                 });
+    //         })
+    //         ->first();
+
+    //     if ($existingTimeline) {
+    //         return redirect()->back()->with('error', 'The selected time is not available at this location on the chosen date.');
+    //     }
+
+    //     $timeline = new Timeline();
+    //     $timeline->title = $request->title;
+    //     $timeline->description = $request->description;
+    //     $timeline->location_id = $location_id;
+    //     $timeline->activity_ids = implode(',', $request->activities);
+    //     $timeline->instructor_id = $request->instructor;
+    //     $timeline->date = $date;
+    //     $timeline->start_time = $start_time;
+    //     $timeline->end_time = $end_time;
+    //     $timeline->status = 'Y';
+    //     $timeline->save();
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $imageName = $image->getClientOriginalName();
+    //         $imagePath = $image->storeAs('uploads/timeline/' . $timeline->id, $imageName, 'public');
+    //     }
+    //     $timeline->image = $imagePath;
+    //     $timeline_is_save = $timeline->save();
+    //     return redirect()->route('admin.timeline.index')->with('success', 'Timeline saved successfully.');
+    // }
+
     public function create(Request $request)
     {
+        // Validate the request
         $this->validate($request, [
             'title' => 'required',
             'location' => 'required',
             'instructor' => 'required',
+            // 'activities' => 'required|array',
             'activities' => 'required',
-            'image' => 'required | mimes:jpeg,jpg,png,webp',
             'description' => 'required',
-            'date' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
+            'days' => 'required|array',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+            'monthly_pass_price' => 'required|numeric|min:0',
+            'single_pass_price' => 'required|numeric|min:0',
         ]);
-        $imagePath = "";
 
-        $timeline = new Timeline();
-        $timeline->title = $request->title;
-        $timeline->description = $request->description;
-        $timeline->location_id = $request->location;
-        $timeline->activity_ids = implode(',', $request->activities);
-        $timeline->instructor_id = $request->instructor;
-        $timeline->date = Carbon::createFromFormat('Y-m-d', $request->date);
         $start_time = Carbon::parse($request->start_time)->format('H:i:s');
         $end_time = Carbon::parse($request->end_time)->format('H:i:s');
-        $timeline->start_time = $start_time;
-        $timeline->end_time = $end_time;
-        $timeline->status = 'Y';
+        $location_id = (int) $request->location;
+        // $activity_ids = implode(',', $request->activities);
+        $activity_ids = $request->activities;
 
-        $timeline->save();
+        // Initialize image path variable
+        $imagePath = "";
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $image->getClientOriginalName();
-            // $imagePath = $image->storeAs('uploads/trainer/' . $user->id . '/', $imageName, 'public');
-            $imagePath = $image->storeAs('uploads/timeline/' . $timeline->id, $imageName, 'public');
+        // Loop through each selected day and find the next upcoming date in the current month
+        foreach ($request->days as $selectedDay) {
+            // dd($selectedDay);
+            $nextDate = Carbon::now()->next($selectedDay);
+
+            // Ensure the next date is within the current month
+            if ($nextDate->month != Carbon::now()->month) {
+                continue; // Skip if the next date goes into the next month
+            }
+
+            $existingTimeline = Timeline::where('location_id', $location_id)
+                ->where('date', $nextDate->format('Y-m-d'))
+                ->where('day', $selectedDay)
+                ->whereMonth('date', '=', $currentMonth)
+                ->whereYear('date', '=', $currentYear)
+                // ->where(function ($query) use ($start_time, $end_time) {
+                //     $query->whereBetween('start_time', [$start_time, $end_time])
+                //         ->orWhereBetween('end_time', [$start_time, $end_time])
+                //         ->orWhere(function ($query) use ($start_time, $end_time) {
+                //             $query->where('start_time', '<=', $start_time)
+                //                 ->where('end_time', '>=', $end_time);
+                //         });
+                // })
+                ->where(function ($query) use ($start_time, $end_time) {
+                    $query->where('start_time', '<=', $start_time)
+                        ->where('end_time', '>=', $end_time);
+                })
+                ->first();
+
+            // If a conflict is found, skip this date
+            if ($existingTimeline) {
+                // continue; // Move on to the next date
+                return redirect()->back()->with('error', 'The selected time is not available at this location on the chosen day.');
+
+            }
+
+            $timeline = new Timeline();
+            $timeline->title = $request->title;
+            $timeline->description = $request->description;
+            $timeline->location_id = $location_id;
+            $timeline->activity_ids = $activity_ids;
+            $timeline->instructor_id = $request->instructor;
+            $timeline->day = Carbon::parse($nextDate)->format('l');
+            $timeline->date = $nextDate->format('Y-m-d');
+            $timeline->start_time = $start_time;
+            $timeline->end_time = $end_time;
+            $timeline->monthly_pass_price = $request->monthly_pass_price;
+            $timeline->single_pass_price = $request->single_pass_price;
+            $timeline->status = 'Y';
+            $timeline->image = $imagePath;
+            $timeline->save();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = $image->getClientOriginalName();
+                $imagePath = $image->storeAs('uploads/timeline/' . $timeline->id, $imageName, 'public');
+            }
+            $timeline->image = $imagePath;
+            $timeline_is_save = $timeline->save();
         }
 
-        $timeline->image = $imagePath;
-        $timeline_is_save = $timeline->save();
-
-        return redirect()->route('admin.timeline.index')->with('success', 'Timeline saved successfully.');
+        return redirect()->route('admin.timeline.index')->with('success', 'Timetable(s) saved successfully.');
     }
 
     public function edit($id)
     {
-        $timeline = Timeline::join('locations', 'timelines.location_id', '=', 'locations.id')  // Joining with locations table
-            ->join('users', 'timelines.instructor_id', '=', 'users.id')        // Joining with users table
+        $timeline = Timeline::join('locations', 'timelines.location_id', '=', 'locations.id')
+            ->join('users', 'timelines.instructor_id', '=', 'users.id')
             ->select(
-                'timelines.*',            // Get all columns from timelines
-                'locations.name as location_name',  // Assuming locations table has a 'name' column
-                'users.name as instructor_name'     // Assuming users table has a 'name' column
+                'timelines.*',
+                'locations.name as location_name',
+                'users.name as instructor_name'
             )
-            ->where('users.role', 'instructor')     // Filtering by instructor role
+            ->where('users.role', 'instructor')
             ->where('timelines.id', $id)
             ->orderBy('timelines.title', 'asc')
             ->first();
-        $selectedLocation = Location::where('id', $timeline->location_id)->first();
-        // dd($selectedLocation->activites);
 
+        // dd($timeline);
+        $selectedLocation = Location::where('id', $timeline->location_id)->first();
         $locations = Location::where('status', 'Y')->get();
         $instructors = User::where('status', 'Y')->where('role', 'instructor')->get();
-        // $specializations = SpecializationCategory::where('status', 'Y')->get();
         $activityIds = explode(',', $selectedLocation->activites);
-
         $activities = ActivityCategory::whereIn('id', $activityIds)->get(['id', 'activity_name']);
-        // dd($activities);
 
-        return view('admin.timeline.edit', compact('timeline', 'activities', 'locations', 'instructors'));
+        $today = Carbon::now();
+        // $today = Carbon::create(2024, 10, 28); // Static date: October 28, 2024
+        $currentMonth = $today->month; // Current month
+        $remainingDays = [];
+        $todayDayName = $today->format('l'); // Get today's day name (e.g., "Monday")
+
+        $dayAlreadySkipped = false; // Flag to check if we've already skipped today's day
+
+        // Loop through the next 6 days
+        for ($i = 0; $i <= 7; $i++) {
+            $date = $today->copy()->addDays($i); // Create a new date for each subsequent day
+
+            if ($date->month == $currentMonth) {
+                $dayName = $date->format('l');
+
+                // If it's today's day name and we haven't skipped it yet, skip it
+                if ($dayName == $todayDayName && !$dayAlreadySkipped) {
+                    $dayAlreadySkipped = true; // Mark that we've skipped today's day once
+                    continue; // Skip this iteration (today's day)
+                }
+
+                // Add the day name to the array (Monday, Tuesday, etc.)
+                $remainingDays[] = $dayName;
+            } else {
+                break; // Stop if the date goes into the next month
+            }
+        }
+        return view('admin.timeline.edit', compact('timeline', 'activities', 'locations', 'instructors', 'remainingDays'));
     }
 
     public function update(Request $request, $id)
@@ -154,23 +333,78 @@ class TimelineController extends Controller
             'activities' => 'required',
             // 'image' => 'required | mimes:jpeg,jpg,png,webp',
             'description' => 'required',
-            'date' => 'required',
-            'time' => 'required',
+            // 'date' => 'required',
+            // 'time' => 'required',
+            'day' => 'required',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i',
+            'monthly_pass_price' => 'required|numeric|min:0',
+            'single_pass_price' => 'required|numeric|min:0',
         ]);
 
         $imagePath = "";
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        $today = Carbon::today();
+        $currentTime = Carbon::now()->toTimeString(); // Get the current time (H:i:s)
+        $currentMonthName = Carbon::now()->format('F');
+
+        $start_time = Carbon::parse($request->start_time)->format('H:i:s');
+        $end_time = Carbon::parse($request->end_time)->format('H:i:s');
+        $location_id = (int) $request->location;
+        // $activity_ids = implode(',', $request->activities);
+
+        $activity_ids = $request->activities;
+
+        $selectedDay = $request->day;
+        // Find the next upcoming date for the selected day
+        $nextDate = Carbon::now()->next($selectedDay);
+        // dd($nextDate->format('Y-m-d'));
+        // Ensure the next date is within the current month
+        if ($nextDate->month != Carbon::now()->month) {
+            return redirect()->back()->with('error', 'The selected day does not fall within the current month.');
+        }
+        // Check if the time slot is available for the selected day
+        $existingTimeline = Timeline::where('location_id', $location_id)
+            // ->where('date', $nextDate->format('Y-m-d'))
+            ->where('day', $selectedDay)
+            ->whereMonth('date', '=', $currentMonth)
+            ->whereYear('date', '=', $currentYear)
+            ->where('id', '!=', $id)  // Exclude current timeline for update
+            // ->where(function ($query) use ($start_time, $end_time) {
+            //     $query->whereBetween('start_time', [$start_time, $end_time])
+            //         ->orWhereBetween('end_time', [$start_time, $end_time])
+            //         ->orWhere(function ($query) use ($start_time, $end_time) {
+            //             $query->where('start_time', '<=', $start_time)
+            //                 ->where('end_time', '>=', $end_time);
+            //         });
+            // })
+            ->where(function ($query) use ($start_time, $end_time) {
+                $query->where('start_time', '<=', $start_time)
+                    ->where('end_time', '>=', $end_time);
+            })
+            ->first();
+
+        // If a conflict is found, return an error
+        if ($existingTimeline) {
+            return redirect()->back()->with('error', 'The selected time is not available at this location on the chosen date.');
+        }
 
         $timeline = Timeline::find($id);
         $timeline->title = $request->title;
         $timeline->description = $request->description;
-        $timeline->location_id = $request->location;
-        $timeline->activity_ids = implode(',', $request->activities);
+        $timeline->location_id = $location_id;
+        $timeline->activity_ids = $activity_ids;
         $timeline->instructor_id = $request->instructor;
-        $timeline->date = Carbon::createFromFormat('Y-m-d', $request->date);
-        $start_time = Carbon::parse($request->start_time)->format('H:i:s'); // Display in HH:MM:SS format
-        $end_time = Carbon::parse($request->end_time)->format('H:i:s'); // Display in HH:MM:SS format
+        $timeline->day = $selectedDay;  // Update selected day
+        // $timeline->date = Carbon::createFromFormat('Y-m-d', $request->date);
+        $timeline->date = $nextDate->format('Y-m-d');
+        // $start_time = Carbon::parse($request->start_time)->format('H:i:s');
+        // $end_time = Carbon::parse($request->end_time)->format('H:i:s');
         $timeline->start_time = $start_time;
         $timeline->end_time = $end_time;
+        $timeline->monthly_pass_price = $request->monthly_pass_price;
+        $timeline->single_pass_price = $request->single_pass_price;
         $timeline->status = 'Y';
 
         $timeline->update();
@@ -181,14 +415,11 @@ class TimelineController extends Controller
             }
             $image = $request->file('image');
             $imageName = $image->getClientOriginalName();
-            // $imagePath = $image->storeAs('uploads/trainer/' . $user->id . '/', $imageName, 'public');
             $imagePath = $image->storeAs('uploads/timeline/' . $id, $imageName, 'public');
             $timeline->image = $imagePath;
             $timeline_is_save = $timeline->save();
         }
-
-        return redirect()->route('admin.timeline.index')->with('success', 'Timeline updated successfully.');
-
+        return redirect()->route('admin.timeline.index')->with('success', 'Timetable updated successfully.');
     }
 
     public function delete($id)
@@ -197,7 +428,7 @@ class TimelineController extends Controller
         $is_timeline_updated = $timeline->delete();
 
         if ($is_timeline_updated) {
-            return redirect()->route('admin.timeline.index')->with('success', 'Timeline deleted successfully');
+            return redirect()->route('admin.timeline.index')->with('success', 'Timetable deleted successfully');
         }
     }
 
@@ -208,7 +439,7 @@ class TimelineController extends Controller
         $is_timeline_updated = $timeline->update();
 
         if ($is_timeline_updated) {
-            return redirect()->route('admin.timeline.index')->with('success', 'Timeline activated successfully');
+            return redirect()->route('admin.timeline.index')->with('success', 'Status is Active');
         }
     }
 
@@ -219,7 +450,7 @@ class TimelineController extends Controller
         $is_timeline_updated = $timeline->update();
 
         if ($is_timeline_updated) {
-            return redirect()->route('admin.timeline.index')->with('success', 'Timeline deactivated successfully');
+            return redirect()->route('admin.timeline.index')->with('success', 'Status is Deactive');
         }
     }
 }

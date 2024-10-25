@@ -16,7 +16,7 @@
             Dashboard
         @endslot
         @slot('title')
-            Create Timeline
+            Create Timetable
         @endslot
     @endcomponent
 
@@ -27,7 +27,7 @@
                     @session('success')
                         <div class="alert alert-success" role="alert"> {{ $value }} </div>
                     @endsession
-                    <h4 class="card-title mb-4">Create Timeline</h4>
+                    {{-- <h4 class="card-title mb-4">Create Timetable</h4> --}}
 
                     <form method="post" action="{{ route('admin.timeline.create') }}" enctype="multipart/form-data">
                         @csrf
@@ -35,35 +35,14 @@
 
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title</label>
+                                    <label for="title" class="form-label">Class Name</label>
                                     <input type="text" class="form-control" id="title" name="title"
-                                        placeholder="Enter Your Name" value="{{ old('title') }}">
+                                        placeholder="Enter Class Name" value="{{ old('title') }}">
                                     @error('title')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="location" class="form-label">Location</label>
-                                    <select class="form-select" name="location" id="location">
-                                        <option>Select location</option>
-                                        @forelse ($locations as $location)
-                                            <option value="{{ $location->id }}">
-                                                {{ $location->name }}</option>
-                                        @empty
-                                            <option value="" disabled>No location available</option>
-                                        @endforelse
-                                    </select>
-                                    @error('location')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
 
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -82,19 +61,39 @@
                                     @enderror
                                 </div>
                             </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <select class="form-select" name="location" id="location">
+                                        <option>Select location</option>
+                                        @forelse ($locations as $location)
+                                            <option value="{{ $location->id }}">
+                                                {{ $location->name }}</option>
+                                        @empty
+                                            <option value="" disabled>No location available</option>
+                                        @endforelse
+                                    </select>
+                                    @error('location')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="activities" class="form-label">Activities</label>
-                                    <select class="select2 form-control select2-multiple" id="activities"
+                                    {{-- <select class="select2 form-control select2-multiple" id="activities"
                                         name="activities[]" multiple="multiple" data-placeholder="Choose activities...">
-                                        {{-- @forelse ($activities as $activity)
-                                            <option value="{{ $activity->id }}">
-                                                {{ $activity->activity_name }}</option>
-                                        @empty
-                                            <option value="" disabled>No activities available</option>
-                                        @endforelse --}}
+                                    </select> --}}
+                                    <select class="form-control" id="activities" name="activities"
+                                        data-placeholder="Choose activities...">
+                                        <option value="" disabled>Choose activity</option>
                                     </select>
-
                                     @error('activities')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -120,35 +119,43 @@
                                     {{-- <textarea required="" name="description" class="form-control" rows="3" id="description"
                                         placeholder="Enter Your Description">{{ old('description') }}</textarea> --}}
                                     <textarea id="description-editor" name="description" class="form-control" rows="3" id="description"
-                                        placeholder="Enter Your Description"></textarea>
+                                        placeholder="Enter Timetable Description"></textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
                         </div>
-
+                        @php
+                            // dd($remainingDays);
+                        @endphp
                         <div class="row">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="example-date-input" class="col-md-2 col-form-label">Date</label>
 
                                     <input class="form-control" type="date" name="date" value="{{ old('date') }}"
                                         id="example-date-input">
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mt-3">
-                                    <label for="formFile" class="form-label" for="image">Image</label>
-                                    <input class="form-control" type="file" id="image" name="image"
-                                        accept="image/*" onchange="previewImage(event)">
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                            </div> --}}
+                            <div class="col-md-12">
+                                <label for="example-date-input" class="col-md-2 col-form-label">Day</label>
+                                <div class="d-flex">
+                                    @foreach ($remainingDays as $day)
+                                        <div class="form-check form-checkbox-outline form-check-primary mb-3 me-3">
+                                            <input class="form-check-input" type="checkbox" name="days[]"
+                                                id="customCheckcolor{{ $loop->iteration }}" value="{{ $day }}">
+                                            <label class="form-check-label" for="customCheckcolor{{ $loop->iteration }}">
+                                                {{ $day }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
-                                    alt="Image Preview" style="display: none;">
+                                @error('days')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
+
 
                         </div>
                         <div class="row mb-3">
@@ -174,11 +181,45 @@
                                     style="max-width: 35px; height: auto; display: none;" />
                             </div> --}}
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="monthly_pass_price" class="form-label">Monthly Pass Price</label>
+                                    <input type="number" class="form-control" id="monthly_pass_price"
+                                        name="monthly_pass_price" placeholder="Enter Monthly Pass Price"
+                                        value="{{ old('monthly_pass_price') }}" step="0.01" min="0">
+                                    @error('monthly_pass_price')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
 
-
-
-
-
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="single_pass_price" class="form-label">Single Pass Price</label>
+                                    <input type="number" class="form-control" id="single_pass_price"
+                                        name="single_pass_price" placeholder="Enter Single Pass Price"
+                                        value="{{ old('single_pass_price') }}" step="0.01" min="0">
+                                    @error('single_pass_price')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mt-3">
+                                    <label for="formFile" class="form-label" for="image">Image</label>
+                                    <input class="form-control" type="file" id="image" name="image"
+                                        accept="image/*" onchange="previewImage(event)">
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
+                                    alt="Image Preview" style="display: none;">
+                            </div>
+                        </div> --}}
                         <!-- <textarea required="" class="form-control" rows="3" style="height: 17px;"></textarea> -->
                         <div>
                             <button type="submit" class="btn btn-primary w-md">Submit</button>
@@ -219,8 +260,8 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                                                                                                                                                            alignleft aligncenter alignright alignjustify | \
-                                                                                                                                                            bullist numlist outdent indent | removeformat | help'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    bullist numlist outdent indent | removeformat | help'
         });
     </script>
 
@@ -286,10 +327,10 @@
 
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block'; // Show the image preview
+                    imagePreview.style.display = 'block';
                 }
 
-                reader.readAsDataURL(file); // Convert the file into a data URL
+                reader.readAsDataURL(file);
             }
         }
     </script>

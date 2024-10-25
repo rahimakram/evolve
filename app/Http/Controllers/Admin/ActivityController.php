@@ -11,22 +11,6 @@ class ActivityController extends Controller
     public function index()
     {
         $activities = ActivityCategory::paginate(10);
-        // dd($professions);
-        // $trainers = DB::table('trainer')
-        //     ->leftJoin('trainer_detail', 'trainer.id', '=', 'trainer_detail.trainer')
-        //     ->leftJoin('trainer_profile', 'trainer.id', '=', 'trainer_profile.trainer')
-        //     ->select(
-        //         'trainer.id as trainer_id',
-        //         'trainer.*',
-        //         'trainer_detail.id as detail_id',
-        //         'trainer_detail.*',
-        //         'trainer_profile.id as profile_id',
-        //         'trainer_profile.*'
-        //     )
-        //     ->where('trainer.is_deleted', '0')
-        //     ->orderBy('trainer.full_name', 'asc')
-        //     ->paginate(10);
-        // dd($trainers);
 
         return view('admin.activity.index', compact('activities'));
     }
@@ -40,6 +24,9 @@ class ActivityController extends Controller
     {
         $this->validate($request, [
             'activity_name' => 'required|string',
+            'image' => 'required | mimes:jpeg,jpg,png,webp|max:1024',
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.', // Custom message for max size
         ]);
 
         $activity = new ActivityCategory();
@@ -48,30 +35,22 @@ class ActivityController extends Controller
 
         $activity_is_save = $activity->save();
         if ($activity_is_save) {
+            // Handle the file upload
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = $image->getClientOriginalName();
+                $imagePath = $image->storeAs('uploads/activity_category/' . $activity->id . '/', $imageName, 'public');
+                $existingCategory = ActivityCategory::find($activity->id);
+                $existingCategory->image = $imagePath;
+                $existingCategory->update();
+            }
             return redirect()->route('admin.activity.index')->with('success', 'Activity saved successfully.');
         }
     }
 
     public function edit($id)
     {
-        // $trainer = DB::table('trainer')
-        //     ->leftJoin('trainer_detail', 'trainer.id', '=', 'trainer_detail.trainer')
-        //     ->leftJoin('trainer_profile', 'trainer.id', '=', 'trainer_profile.trainer')
-        //     ->select(
-        //         'trainer.id as trainer_id',
-        //         'trainer.*',
-        //         'trainer_detail.id as detail_id',
-        //         'trainer_detail.*',
-        //         'trainer_profile.id as profile_id',
-        //         'trainer_profile.*'
-        //     )
-        //     ->where('trainer.id', $id)
-        //     ->orderBy('trainer.full_name', 'asc')
-        //     ->first();
-
         $activity = ActivityCategory::find($id);
-
-        // dd($trainer);
         return view('admin.activity.edit', compact('activity'));
 
     }
@@ -80,6 +59,9 @@ class ActivityController extends Controller
     {
         $this->validate($request, [
             'activity_name' => 'required|string',
+            'image' => 'mimes:jpeg,jpg,png,webp|max:1024',
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.', // Custom message for max size
         ]);
 
         $activity = ActivityCategory::find($id);
@@ -88,6 +70,19 @@ class ActivityController extends Controller
         $activity_is_updated = $activity->update();
 
         if ($activity_is_updated) {
+            // Handle the file upload
+            if ($request->hasFile('image')) {
+                // Delete the old image if it exists
+                if ($activity->image && \Storage::disk('public')->exists($activity->image)) {
+                    \Storage::disk('public')->delete($activity->image);
+                }
+                $image = $request->file('image');
+                $imageName = $image->getClientOriginalName();
+                $imagePath = $image->storeAs('uploads/activity_category/' . $id . '/', $imageName, 'public');
+                $existingCategory = ActivityCategory::find($id);
+                $existingCategory->image = $imagePath;
+                $existingCategory->update();
+            }
             return redirect()->route('admin.activity.index')->with('success', 'Activity updated successfully.');
         }
     }
@@ -109,7 +104,7 @@ class ActivityController extends Controller
         $is_activity_updated = $activity->update();
 
         if ($is_activity_updated) {
-            return redirect()->route('admin.activity.index')->with('success', 'Activity activated successfully');
+            return redirect()->route('admin.activity.index')->with('success', 'Status is Active');
         }
     }
 
@@ -120,7 +115,7 @@ class ActivityController extends Controller
         $is_activity_updated = $activity->update();
 
         if ($is_activity_updated) {
-            return redirect()->route('admin.activity.index')->with('success', 'Activity deactivated successfully');
+            return redirect()->route('admin.activity.index')->with('success', 'Status is Deactive');
         }
     }
 }

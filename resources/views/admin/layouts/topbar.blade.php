@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="{{ url('/admin/dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/favicon.webp') }}" alt="" height="22">
+                        <img src="{{ URL::asset('dist/images/logo-white.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo.webp') }}" alt="" height="17">
+                        <img src="{{ URL::asset('dist/images/logo-white.png') }}" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="{{ url('/admin/dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('build/images/logo-light.svg') }}" alt="" height="22">
+                        <img src="{{ URL::asset('dist/images/logo-white.png') }}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('build/images/logo.webp') }}" alt="" height="19">
+                        <img src="{{ URL::asset('dist/images/logo-white.png') }}" alt="" height="50">
                     </span>
                 </a>
             </div>
@@ -164,19 +164,26 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="contacts-profile"><i
-                            class="bx bx-user font-size-16 align-middle me-1"></i> <span
-                            key="t-profile">@lang('translation.Profile')</span></a>
-                    <a class="dropdown-item" href="#"><i
+                    {{-- <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                        data-bs-target=".update-profile"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                        <span key="t-profile">@lang('translation.Profile')</span></a> --}}
+                    {{-- <a class="dropdown-item" href="#"><i
                             class="bx bx-wallet font-size-16 align-middle me-1"></i> <span
-                            key="t-my-wallet">@lang('translation.My_Wallet')</span></a>
-                    <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
+                            key="t-my-wallet">@lang('translation.My_Wallet')</span></a> --}}
+                    {{-- <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
                         data-bs-target=".change-password"><span class="badge bg-success float-end">11</span><i
                             class="bx bx-wrench font-size-16 align-middle me-1"></i> <span
-                            key="t-settings">@lang('translation.Settings')</span></a>
-                    <a class="dropdown-item" href="#"><i
+                            key="t-settings">@lang('translation.Settings')</span></a> --}}
+                    {{-- <a class="dropdown-item" href="#"><i
                             class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span
-                            key="t-lock-screen">@lang('translation.Lock_screen')</span></a>
+                            key="t-lock-screen">@lang('translation.Lock_screen')</span></a> --}}
+                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                        data-bs-target=".update-profile"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                        <span key="t-profile">Update Profile</span></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item d-block" href="#" data-bs-toggle="modal"
+                        data-bs-target=".change-password"><i class="bx bx-wrench font-size-16 align-middle me-1"></i>
+                        <span key="t-settings">Change Password</span></a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="javascript:void();"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
@@ -205,7 +212,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="change-password">
+                <form method="POST" action="{{ route('updatePassword', auth()->user()->id) }}">
                     @csrf
                     <input type="hidden" value="{{ Auth::user()->id }}" id="data_id">
                     <div class="mb-3">
@@ -236,11 +243,107 @@
                     </div>
 
                     <div class="mt-3 d-grid">
-                        <button class="btn btn-primary waves-effect waves-light UpdatePassword"
-                            data-id="{{ Auth::user()->id }}" type="submit">Update Password</button>
+                        <button class="btn btn-primary waves-effect waves-light" type="submit">Update
+                            Password</button>
                     </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!--  Update Profile example -->
+<div class="modal fade update-profile" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="{{ route('updateProfile', Auth::user()->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" value="{{ Auth::user()->id }}" id="data_id">
+                    <div class="mb-3">
+                        <label for="useremail" class="form-label">Email</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                            id="useremail" value="{{ Auth::user()->email }}" name="email"
+                            placeholder="Enter email" autofocus>
+                        <div class="text-danger" id="emailError" data-ajax-feedback="email"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                            value="{{ Auth::user()->name }}" id="username" name="name" autofocus
+                            placeholder="Enter username">
+                        <div class="text-danger" id="nameError" data-ajax-feedback="name"></div>
+                    </div>
+
+                    {{-- <div class="mb-3">
+                        <label for="userdob">Date of Birth</label>
+                        <div class="input-group" id="datepicker1">
+                            <input type="text" class="form-control @error('dob') is-invalid @enderror"
+                                placeholder="dd-mm-yyyy" data-date-format="dd-mm-yyyy"
+                                data-date-container='#datepicker1' data-date-end-date="0d"
+                                value="{{ date('d-m-Y', strtotime(Auth::user()->dob)) }}" data-provide="datepicker"
+                                name="dob" autofocus id="dob">
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                        <div class="text-danger" id="dobError" data-ajax-feedback="dob"></div>
+                    </div> --}}
+
+                    <div class="mb-3">
+                        <label for="avatar">Profile Picture</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control @error('avatar') is-invalid @enderror"
+                                id="avatar" name="avatar" autofocus accept="image/*"
+                                onchange="previewLogo(event)">
+                            <label class="input-group-text" for="avatar">Upload</label>
+                        </div>
+                        <div class="text-start mt-2">
+                            @if (Auth::user()->avatar)
+                                <img id="avatar-preview" src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                                    alt="Current Image" class="rounded-circle avatar-lg" />
+                            @else
+                                <img id="avatar-preview" class="rounded-circle avatar-lg" src="#"
+                                    alt="Image Preview" style="display: none;" />
+                            @endif
+                            {{-- <img src="{{ asset(Auth::user()->avatar) }}" alt=""
+                                class="rounded-circle avatar-lg"> --}}
+                            {{-- <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt=""
+                                class="rounded-circle avatar-lg"> --}}
+                        </div>
+                        <div class="text-danger" role="alert" id="avatarError" data-ajax-feedback="avatar"></div>
+                    </div>
+
+                    <div class="mt-3 d-grid">
+                        {{-- <button class="btn btn-primary waves-effect waves-light UpdateProfile"
+                            data-id="{{ Auth::user()->id }}" type="submit">Update</button> --}}
+                        <button class="btn btn-primary waves-effect waves-light" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    function previewLogo(event) {
+        const imagePreview = document.getElementById('avatar-preview');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block'; // Show the image preview
+            }
+
+            reader.readAsDataURL(file); // Convert the file into a data URL
+        }
+    }
+</script>

@@ -48,17 +48,16 @@ class TeamController extends Controller
                 $trainer->specialization_names = $specializationNames;
             }
         }
-
-        // dd($trainers);
-
-        // dd($trainers);
         return view('admin.team.index', compact('trainers'));
     }
 
     public function add()
     {
         $specializations = SpecializationCategory::where('status', 'Y')->get();
-        return view('admin.team.add', compact('specializations'));
+        $countries = DB::table('countries')->get();
+
+        // dd($countries);
+        return view('admin.team.add', compact('specializations', 'countries'));
     }
 
     public function create(Request $request)
@@ -66,11 +65,10 @@ class TeamController extends Controller
         $this->validate($request, [
             'trainer_name' => 'required',
             'trainer_contact' => 'required|max:10',
-            // 'trainer_email' => 'required|email|unique:trainer,email',
             'trainer_email' => 'required|email|unique:users,email',
             'specialisation' => 'required',
             'password' => 'required|min:8|confirmed', // 'confirmed' ensures that password_confirmation matches
-            'image' => 'required | mimes:jpeg,jpg,png,webp',
+            'image' => 'required | mimes:jpeg,jpg,png,webp|max:1024',
             'description' => 'required',
             'special_focus_area' => 'required',
             'experience' => 'required',
@@ -78,6 +76,9 @@ class TeamController extends Controller
             'classes' => 'required',
             'education' => 'required',
             'languages' => 'required',
+            'nationality' => 'required'
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.', // Custom message for max size
         ]);
 
         // Ensure the date is in the correct format
@@ -121,6 +122,7 @@ class TeamController extends Controller
             $user_details->languages = json_encode(explode('|', $request->languages));
             $user_details->experience = json_encode(explode('|', $request->experience));
             $user_details->education = json_encode(explode('|', $request->education));
+            $user_details->country_id = $request->nationality;
             $user_details_save = $user_details->save();
 
             return redirect()->route('admin.teams.index')->with('success', 'Instructor saved successfully.');
@@ -130,6 +132,7 @@ class TeamController extends Controller
     public function edit($id)
     {
         $specializations = SpecializationCategory::where('status', 'Y')->get();
+        $countries = DB::table('countries')->get();
         $trainer = User::leftJoin('user_details', 'users.id', '=', 'user_details.user_id')
             // ->leftJoin('trainer_profile', 'trainer.id', '=', 'trainer_profile.trainer')
             ->select(
@@ -144,8 +147,9 @@ class TeamController extends Controller
             ->orderBy('users.name', 'asc')
             ->first();
         $selectedSpecializations = explode(',', $trainer->specialization);
+        // dd($trainer);
 
-        return view('admin.team.edit', compact('trainer', 'specializations', 'selectedSpecializations'));
+        return view('admin.team.edit', compact('trainer', 'specializations', 'selectedSpecializations', 'countries'));
 
     }
 
@@ -155,7 +159,7 @@ class TeamController extends Controller
             'trainer_name' => 'required',
             'trainer_contact' => 'required',
             'trainer_email' => 'required|email',
-            'image' => 'mimes:jpeg,jpg,png,webp',
+            'image' => 'mimes:jpeg,jpg,png,webp|max:1024',
             'description' => 'required',
             'special_focus_area' => 'required',
             'experience' => 'required',
@@ -163,6 +167,9 @@ class TeamController extends Controller
             'classes' => 'required',
             'education' => 'required',
             'languages' => 'required',
+            'nationality' => 'required',
+        ], [
+            'image.max' => 'The image may not be greater than 1MB.', // Custom message for max size
         ]);
 
         $imagePath = '';
@@ -203,6 +210,7 @@ class TeamController extends Controller
             $userDetails->experience = json_encode(explode('|', $request->experience));
             $userDetails->education = json_encode(explode('|', $request->education));
             $userDetails->description = $request->description;
+            $userDetails->country_id = $request->nationality;
             $userDetailsUpdated = $userDetails->update();
 
             return redirect()->route('admin.teams.index')->with('success', 'Trainer updated successfully.');
@@ -230,7 +238,7 @@ class TeamController extends Controller
         $is_user_updated = $user->update();
 
         if ($is_user_updated) {
-            return redirect()->route('admin.teams.index')->with('success', 'Trainer activated successfully');
+            return redirect()->route('admin.teams.index')->with('success', 'Status is Active');
         }
     }
 
@@ -241,7 +249,7 @@ class TeamController extends Controller
         $is_user_updated = $user->update();
 
         if ($is_user_updated) {
-            return redirect()->route('admin.teams.index')->with('success', 'Trainer deactivated successfully');
+            return redirect()->route('admin.teams.index')->with('success', 'Status is Deactive');
         }
     }
 }

@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav  ms-auto br-1 mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('join.our.class') }}">Join a Class</a>
+                    <a class="nav-link" aria-current="page" href="{{ route('join.our.class') }}">Join a Class</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="fitness-training">Fitness Training</a>

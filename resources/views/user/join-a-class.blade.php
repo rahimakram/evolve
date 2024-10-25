@@ -62,12 +62,12 @@
                                     <div class="days-title mb-32">{{ $day }}</div>
                                     @foreach ($day_timelines as $timeline)
                                         {{-- {{ $timeline }} --}}
-                                        <div class="col-md-6 wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="2s">
+                                        <div class="col-md-6 wow fadeInLeft mb-5" data-wow-delay="300ms"
+                                            data-wow-duration="2s">
                                             <div class="days-box p-32">
                                                 <div class="days-time mb-32">
                                                     <div class="d-flex justify-content-between mb-16">
                                                         <div class="days-pic-text">
-                                                            {{-- <h5>6:30 PM - 7:30 PM</h5> --}}
                                                             <h5>{{ \Carbon\Carbon::parse($timeline->start_time)->format('g:i A') }}
                                                                 -
                                                                 {{ \Carbon\Carbon::parse($timeline->end_time)->format('g:i A') }}
@@ -75,27 +75,17 @@
                                                             <h3>{{ $timeline->title }}</h3>
                                                             <h6>{{ $timeline->location_name }} <span
                                                                     class="px-2">•</span>
-                                                                @php
-                                                                    $mapLink = '';
-                                                                    if (
-                                                                        !preg_match(
-                                                                            '/^https?:\/\//i',
-                                                                            $timeline->map_link,
-                                                                        )
-                                                                    ) {
-                                                                        // If not, prepend http://
-                                                                        $mapLink = 'http://' . $timeline->map_link;
-                                                                    }
-                                                                @endphp
                                                                 <span class="color-primary">View map</span><span><a
-                                                                        href="{{ $mapLink }}"><img
+                                                                        href="https://www.google.com/maps?q={{ $timeline->latitude }},{{ $timeline->longitude }}"
+                                                                        target="_blank"><img
                                                                             src="{{ URL::asset('dist/images/arrow-top.png') }}"
                                                                             class="img-fluid ms-2"
                                                                             alt=""></a></span>
                                                             </h6>
                                                             <h6>Instructor: {{ $timeline->instructor_name }} <span
                                                                     class="px-2">•</span> <span class="color-primary">View
-                                                                    profile</span><span><a href="#"><img
+                                                                    profile</span><span><a href="javascript:void(0)"
+                                                                        onclick="trainer_info_modal({{ $timeline->instructor_id }})"><img
                                                                             src="{{ URL::asset('dist/images/arrow-top.png') }}"
                                                                             class="img-fluid ms-2"
                                                                             alt=""></a></span>
@@ -108,15 +98,15 @@
                                                     </div>
                                                     <p>{{ strip_tags($timeline->description) }}</p>
                                                 </div>
-
+                                                {{-- {{ $timeline->future_dates }} --}}
                                                 <div class="days-dates">
                                                     <div class="dates-available">DATES AVAILABLE:</div>
                                                     <div class="dates-available-days">
-                                                        <div class="d-a-day">July 1</div>
-                                                        <div class="d-a-day">July 8</div>
-                                                        <div class="d-a-day">July 15</div>
-                                                        <div class="d-a-day">July 22</div>
-                                                        <div class="d-a-day">July 29</div>
+                                                        @foreach ($timeline->future_dates as $date)
+                                                            <div class="d-a-day">
+                                                                {{ \Carbon\Carbon::parse($date)->format('F j') }}
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
 
@@ -129,7 +119,9 @@
                                                     data-start-time="{{ \Carbon\Carbon::parse($timeline->start_time)->format('g:i A') }}"
                                                     data-end-time="{{ \Carbon\Carbon::parse($timeline->end_time)->format('g:i A') }}"
                                                     data-instructor-name="{{ $timeline->instructor_name }}"
-                                                    data-timeline-id="{{ $timeline->id }}">Join
+                                                    data-timeline-id="{{ $timeline->id }}"
+                                                    data-single-pass-price="{{ $timeline->single_pass_price }}"
+                                                    data-monthly-pass-price="{{ $timeline->monthly_pass_price }}">Join
                                                     Class</a>
                                             </div>
                                         </div>
@@ -144,7 +136,7 @@
                                     <div class="days-title mb-32">{{ $day }}</div>
                                     @foreach ($day_timelines as $timeline)
                                         @if ($day == $timeline->day_name)
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-5">
                                                 <div class="days-box p-32">
                                                     <div class="days-time mb-32">
                                                         <div class="d-flex justify-content-between mb-16">
@@ -169,7 +161,8 @@
                                                                         }
                                                                     @endphp
                                                                     <span class="color-primary">View map</span><span><a
-                                                                            href="{{ $mapLink }}"><img
+                                                                            href="https://www.google.com/maps?q={{ $timeline->latitude }},{{ $timeline->longitude }}"
+                                                                            target="_blank"><img
                                                                                 src="{{ URL::asset('dist/images/arrow-top.png') }}"
                                                                                 class="img-fluid ms-2"
                                                                                 alt=""></a></span>
@@ -177,7 +170,8 @@
                                                                 <h6>Instructor: {{ $timeline->instructor_name }} <span
                                                                         class="px-2">•</span> <span
                                                                         class="color-primary">View profile</span><span><a
-                                                                            href="#"><img
+                                                                            href="javascript:void(0)"
+                                                                            onclick="trainer_info_modal({{ $timeline->instructor_id }})"><img
                                                                                 src="{{ URL::asset('dist/images/arrow-top.png') }}"
                                                                                 class="img-fluid ms-2"
                                                                                 alt=""></a></span>
@@ -194,11 +188,14 @@
                                                     <div class="days-dates">
                                                         <div class="dates-available">DATES AVAILABLE:</div>
                                                         <div class="dates-available-days">
-                                                            <div class="d-a-day">July 1</div>
-                                                            <div class="d-a-day">July 8</div>
+                                                            @foreach ($timeline->future_dates as $date)
+                                                                <div class="d-a-day">
+                                                                    {{ \Carbon\Carbon::parse($date)->format('F j') }}</div>
+                                                            @endforeach
+                                                            {{-- <div class="d-a-day">July 8</div>
                                                             <div class="d-a-day">July 15</div>
                                                             <div class="d-a-day">July 22</div>
-                                                            <div class="d-a-day">July 29</div>
+                                                            <div class="d-a-day">July 29</div> --}}
                                                         </div>
                                                     </div>
 
@@ -210,7 +207,9 @@
                                                         data-start-time="{{ \Carbon\Carbon::parse($timeline->start_time)->format('g:i A') }}"
                                                         data-end-time="{{ \Carbon\Carbon::parse($timeline->end_time)->format('g:i A') }}"
                                                         data-instructor-name="{{ $timeline->instructor_name }}"
-                                                        data-timeline-id="{{ $timeline->id }}">Join
+                                                        data-timeline-id="{{ $timeline->id }}"
+                                                        data-single-pass-price="{{ $timeline->single_pass_price }}"
+                                                        data-monthly-pass-price="{{ $timeline->monthly_pass_price }}">Join
                                                         Class</a>
                                                 </div>
                                             </div>
@@ -252,7 +251,7 @@
                                         <h6>QAR</h6>
                                     </div>
                                     <div class="sp">
-                                        <h2>50</h2>
+                                        <h2 id="singlePassPrice"></h2>
                                     </div>
                                     <div class="sp">
                                         <h6>.00</h6>
@@ -273,7 +272,7 @@
                                         <h6>QAR</h6>
                                     </div>
                                     <div class="sp">
-                                        <h2>149</h2>
+                                        <h2 id="monthlyPassPrice"></h2>
                                     </div>
                                     <div class="sp">
                                         <h6>.00</h6>
@@ -307,12 +306,20 @@
                 var address = $(this).data('address');
                 var instructor_name = $(this).data('instructor-name');
                 var timeline_id = $(this).data('timeline-id');
+                var monthly_pass_price = $(this).data('monthly-pass-price');
+                var single_pass_price = $(this).data('single-pass-price');
+
+                console.log(single_pass_price);
+
 
                 $('#timelineDetails').html(
                     '<h6>' + title + '<span class="px-3">•</span>' + day + ', ' +
                     start_time + ' ' + '-' + ' ' + end_time + '<span class="px-3">•</span>' + address +
                     '<span class="px-3">•</span>Instructor: ' + instructor_name + '</h6>'
                 );
+
+                $('#singlePassPrice').text(single_pass_price);
+                $('#monthlyPassPrice').text(monthly_pass_price);
 
                 // Update the anchor href with the dynamic route
                 var singlePassUrl = "{{ route('single.pass.payment', ':id') }}";

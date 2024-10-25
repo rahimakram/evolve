@@ -83,7 +83,7 @@ h6{
     font-size: 14px;
     color: var(--para-color);
     line-height: 20px;
-    font-family: 'Gotham'; 
+    font-family: 'Gotham-Medium'; 
 }
 p{
     font-size: 16px;
@@ -279,6 +279,7 @@ section.hero{
 /********** group-fitness **********/
 .group-fitness{
     background-color: #111827;
+    background-color: #000;
 }
 .btn.btn-schedule{
     font-size: 16px;
@@ -378,6 +379,9 @@ a.btn.btn-schedule:hover {
 .site-footer ul li h6:hover{
     color: var(--primary);
 }
+.site-footer p {
+    font-size: 14px;
+}
 .footer-menu ul li h6{
     font-family: 'Gotham-Medium';
 }
@@ -462,6 +466,7 @@ section.quote{
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);    
+    margin: auto;
 }
 #our-team-gallery .card-img-box img:hover{
     transition: ease-in-out 1s;
@@ -561,9 +566,11 @@ section.quote{
 }
 #our-locations .card-img-box{
     max-height: 160px;
+    height: 160px;
     box-shadow: 0px 20px 40px -8px rgba(16, 24, 40, 0.1);
     border-radius: 6px;
     overflow: hidden;
+    text-align: center;
 }
 #our-locations .card-img-box img:hover{
     transition: ease-in-out 1s;
@@ -661,6 +668,7 @@ section.quote{
     border-radius: 50%;
     max-width: 96px;
     max-height: 96px;
+    overflow: hidden;
 }
 .days-dates{
     display: flex;
@@ -804,4 +812,21 @@ ul.terms-ul li{
 }
 #fitness-training-gallery .card p,#fitness-training-gallery2 .card p{
     font-size: 16px;
+}
+
+.loc-model-img {
+    max-width: 300px;
+    max-height: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+.loc-model-img img{
+    height: 100%;
+}
+
+.location-card .card-img-box img {
+    height: 100%;
+    object-fit: cover;
 }

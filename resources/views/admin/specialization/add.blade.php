@@ -26,7 +26,7 @@
                     @session('success')
                         <div class="alert alert-success" role="alert"> {{ $value }} </div>
                     @endsession
-                    <h4 class="card-title mb-4">Create Specialization</h4>
+                    {{-- <h4 class="card-title mb-4">Create Specialization</h4> --}}
 
                     <form method="post" action="{{ route('admin.specialization.create') }}" enctype="multipart/form-data">
                         @csrf
@@ -34,9 +34,9 @@
 
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label for="specialization_name" class="form-label">Name</label>
+                                    <label for="specialization_name" class="form-label">Specialization Name</label>
                                     <input type="text" class="form-control" id="specialization_name"
-                                        name="specialization_name" placeholder="Enter Your Name"
+                                        name="specialization_name" placeholder="Enter Specialization"
                                         value="{{ old('specialization_name') }}">
                                     @error('specialization_name')
                                         <span class="text-danger">{{ $message }}</span>

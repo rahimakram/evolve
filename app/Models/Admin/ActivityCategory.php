@@ -12,6 +12,7 @@ class ActivityCategory extends Model
 
     protected $fillables = [
         'activity_name',
+        'image',
         'status',
     ];
 }

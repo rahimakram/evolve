@@ -16,7 +16,7 @@
             Dashboard
         @endslot
         @slot('title')
-            Create Team
+            Create Instructor
         @endslot
     @endcomponent
 
@@ -27,17 +27,16 @@
                     @session('success')
                         <div class="alert alert-success" role="alert"> {{ $value }} </div>
                     @endsession
-                    <h4 class="card-title mb-4">Create Team</h4>
+                    {{-- <h4 class="card-title mb-4">Create Team</h4> --}}
 
                     <form method="post" action="{{ route('admin.teams.create') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="trainer_name" class="form-label">Name</label>
+                                    <label for="trainer_name" class="form-label">Instructor Name</label>
                                     <input type="text" class="form-control" id="trainer_name" name="trainer_name"
-                                        placeholder="Enter Your Name" value="{{ old('trainer_name') }}">
+                                        placeholder="Enter Instructor's Name" value="{{ old('trainer_name') }}">
                                     @error('trainer_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -47,7 +46,8 @@
                                 <div class="mb-3">
                                     <label for="trainer_contact" class="form-label">Contact</label>
                                     <input type="number" class="form-control" id="trainer_contact" name="trainer_contact"
-                                        placeholder="Enter Your Contact Number" value="{{ old('trainer_contact') }}">
+                                        placeholder="Enter Instructor's Contact Number"
+                                        value="{{ old('trainer_contact') }}">
                                     @error('trainer_contact')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -56,17 +56,49 @@
                         </div>
 
                         <div class="row">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="trainer_email" class="form-label">Email</label>
                                     <input type="email" class="form-control" name="trainer_email" id="trainer_email"
-                                        placeholder="Enter Your Email ID" value="{{ old('trainer_email') }}">
+                                        placeholder="Enter Instructor's Email ID" value="{{ old('trainer_email') }}">
                                     @error('trainer_email')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="example-date-input" class="form-label">DOB</label>
+
+                                    <input class="form-control" type="date" name="dob" value="{{ old('dob') }}"
+                                        id="example-date-input">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="nationality" class="form-label">Nationality</label>
+                                    <select class="form-control" id="nationality" name="nationality"
+                                        data-placeholder="Choose activities...">
+                                        <option value="" disabled>Choose nationality</option>
+                                        @forelse ($countries as $country)
+                                            <option value="{{ $country->countryId }}">{{ $country->countryName }}
+                                            </option>
+                                        @empty
+                                            <option value="" disabled>no country</option>
+                                        @endforelse
+                                    </select>
+                                    @error('nationality')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="specialisation" class="form-label">Specialisation</label>
@@ -88,20 +120,10 @@
 
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="specialisation" class="form-label">Specialisation</label>
-                                    <input type="text" class="form-control" id="specialisation" name="specialisation"
-                                        placeholder="Enter Your Specialisation" value="{{ old('specialisation') }}">
-                                    @error('specialisation')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="row" style="align-items: baseline;">
-                            <div class="col-md-6">
-                                <div class="mt-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="">
                                     <label for="formFile" class="form-label">Image</label>
                                     <input class="form-control" type="file" id="formFile" name="image"
                                         accept="image/*" onchange="previewImage(event)">
@@ -112,107 +134,11 @@
                                 <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
                                     alt="Image Preview" style="display: none;">
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="special_focus_area" class="form-label">Special Focus Area</label>
-                                    <textarea required="" name="special_focus_area" class="form-control" rows="3" id="special_focus_area"
-                                        placeholder="Enter Your Special Focus Area">{{ old('special_focus_area') }}</textarea>
-                                    @error('special_focus_area')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="description-editor" class="form-label">Description</label>
-                                    <textarea name="description" class="form-control" rows="3" id="description-editor"
-                                        placeholder="Enter Your Description">{{ old('description') }}</textarea>
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="experience" class="form-label">Experience</label>
-                                    <textarea required="" name="experience" class="form-control" rows="3" id="experience"
-                                        placeholder="Enter Your Experience">{{ old('experience') }}</textarea>
-                                    @error('experience')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="certification" class="form-label">Certification</label>
-                                    <textarea required="" name="certification" class="form-control" rows="3" id="certification"
-                                        placeholder="Enter Your Certification">{{ old('certification') }}</textarea>
-                                    @error('certification')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">
-
-
                             <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="classes" class="form-label">Classes</label>
-                                    <textarea required="" name="classes" class="form-control" rows="3" id="classes"
-                                        placeholder="Enter Your Classes">{{ old('classes') }}</textarea>
-                                    @error('classes')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="education" class="form-label">Education</label>
-                                    <textarea required="" name="education" class="form-control" rows="3" id="education"
-                                        placeholder="Enter Your Education">{{ old('education') }}</textarea>
-                                    @error('education')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" style="align-items: baseline">
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="languages" class="form-label">Languages</label>
-                                    <textarea required="" name="languages" class="form-control" rows="3" id="languages"
-                                        placeholder="Enter Your Languages">{{ old('languages') }}</textarea>
-                                    @error('languages')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="example-date-input" class="col-md-2 col-form-label">DOB</label>
-
-                                    <input class="form-control" type="date" name="dob"
-                                        value="{{ old('dob') }}" id="example-date-input">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
+                                <div class="">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password"
                                         placeholder="Enter Password" value="{{ old('password') }}">
@@ -222,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="mb-3">
+                                <div class="">
                                     <label for="password_confirmation" class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" id="password_confirmation"
                                         name="password_confirmation" placeholder="Confirm Password"
@@ -233,8 +159,93 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <textarea required="" class="form-control" rows="3" style="height: 17px;"></textarea> -->
-                        <div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="description-editor" class="form-label">Description</label>
+                                    <textarea name="description" class="form-control" rows="3" id="description-editor"
+                                        placeholder="Enter Instructor's Description">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="experience" class="form-label">Experience</label>
+                                    <textarea required="" name="experience" class="form-control" rows="3" id="experience"
+                                        placeholder="Enter Instructor's Experience">{{ old('experience') }}</textarea>
+                                    @error('experience')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="certification" class="form-label">Certification</label>
+                                    <textarea required="" name="certification" class="form-control" rows="3" id="certification"
+                                        placeholder="Enter Instructor's Certification">{{ old('certification') }}</textarea>
+                                    @error('certification')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="classes" class="form-label">Classes</label>
+                                    <textarea required="" name="classes" class="form-control" rows="3" id="classes"
+                                        placeholder="Enter Instructor's Classes">{{ old('classes') }}</textarea>
+                                    @error('classes')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="education" class="form-label">Education</label>
+                                    <textarea required="" name="education" class="form-control" rows="3" id="education"
+                                        placeholder="Enter Instructor's Education">{{ old('education') }}</textarea>
+                                    @error('education')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="align-items: baseline">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="special_focus_area" class="form-label">Special Focus Area</label>
+                                    <textarea required="" name="special_focus_area" class="form-control" rows="3" id="special_focus_area"
+                                        placeholder="Enter Instructor's Special Focus Area">{{ old('special_focus_area') }}</textarea>
+                                    @error('special_focus_area')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <label for="languages" class="form-label">Languages</label>
+                                    <textarea required="" name="languages" class="form-control" rows="3" id="languages"
+                                        placeholder="Enter Your Languages">{{ old('languages') }}</textarea>
+                                    @error('languages')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
                             <button type="submit" class="btn btn-primary w-md">Submit</button>
                         </div>
                     </form>
@@ -273,8 +284,8 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                                                                                                                                alignleft aligncenter alignright alignjustify | \
-                                                                                                                                bullist numlist outdent indent | removeformat | help'
+                                                                                                                                                                                                                                                                                                                                                                                                        alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                                                                                                                                                                                                                                                                        bullist numlist outdent indent | removeformat | help'
         });
     </script>
 

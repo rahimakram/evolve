@@ -22,7 +22,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Edit Specialization</h4>
+                    {{-- <h4 class="card-title mb-4">Edit Specialization</h4> --}}
 
                     <form method="post" action="{{ route('admin.specialization.update', $specialization->id) }}"
                         enctype="multipart/form-data">
@@ -30,9 +30,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label for="specialization_name" class="form-label">Name</label>
+                                    <label for="specialization_name" class="form-label">Specialization Name</label>
                                     <input type="text" class="form-control" id="specialization_name"
-                                        name="specialization_name" placeholder="Enter Your Name"
+                                        name="specialization_name" placeholder="Enter Specialization"
                                         value="{{ old('specialization_name') ? old('specialization_name') : $specialization->specialization_name }}">
                                     @error('specialization_name')
                                         <span class="text-danger">{{ $message }}</span>

@@ -8,7 +8,6 @@
     <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-
     @component('admin.components.breadcrumb')
         @slot('li_1')
             Dashboard
@@ -23,25 +22,22 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        @session('success')
-                            <div class="alert alert-success" role="alert"> {{ $value }} </div>
-                        @endsession
                         <div class="col-sm-4">
                             <!-- <div class="search-box me-2 mb-2 d-inline-block">
-                                                                                                                                                                                                                                        <div class="position-relative">
-                                                                                                                                                                                                                                            <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
-                                                                                                                                                                                                                                            <i class="bx bx-search-alt search-icon"></i>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                        <div class="position-relative">
+                                                                                                                                                                                                                                                                                                            <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
+                                                                                                                                                                                                                                                                                                            <i class="bx bx-search-alt search-icon"></i>
+                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                    </div> -->
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
                                 <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#newContactModal"
-                                                                                                                                                                                                                                            class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                                                                                                                                                                                                                                class="mdi mdi-plus me-1"></i> Create Team</button> -->
+                                                                                                                                                                                                                                                                                                            class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
+                                                                                                                                                                                                                                                                                                                class="mdi mdi-plus me-1"></i> Create Team</button> -->
                                 <a href="{{ route('admin.teams.add') }}"
                                     class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                        class="mdi mdi-plus me-1"></i> Create Team</a>
+                                        class="mdi mdi-plus me-1"></i> Create Instructor</a>
                             </div>
                         </div><!-- end col-->
                     </div>
@@ -66,8 +62,15 @@
                                 @forelse ($trainers as $trainer)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img class="rounded-circle header-profile-user"
-                                                src="{{ URL::asset('storage/' . $trainer->avatar) }}" alt="Header Avatar">
+                                        <td>
+                                            @if ($trainer->avatar)
+                                                <img class="rounded-circle header-profile-user"
+                                                    src="{{ URL::asset('storage/' . $trainer->avatar) }}"
+                                                    alt="Header Avatar">
+                                            @else
+                                                N/A
+                                            @endif
+
                                         </td>
                                         <td>{{ $trainer->name }}</td>
                                         <td>{{ $trainer->contact ? $trainer->contact : 'N/A' }}</td>
@@ -83,21 +86,21 @@
                                         <td>
                                             @if ($trainer->status == 'Y')
                                                 <button onclick="confirmDeactivate({{ $trainer->u_id }})" type="button"
-                                                    class="btn btn-sm btn-danger waves-effect waves-light">
-                                                    <i class="bx bx-block font-size-16 align-middle me-2"></i> Deactivate
+                                                    class="btn btn-sm btn-success waves-effect waves-light">
+
+                                                    Active
                                                 </button>
-                                                <form style="display:none"
-                                                    id="deactivate_trainer_form_{{ $trainer->u_id }}"
+                                                <form style="display:none" id="deactivate_trainer_form_{{ $trainer->u_id }}"
                                                     action="{{ route('admin.teams.deactivate', $trainer->u_id) }}"
                                                     method="post">
                                                     @csrf
                                                 </form>
                                             @else
                                                 <button onclick="confirmActivate({{ $trainer->u_id }})" type="button"
-                                                    class="btn btn-sm btn-success waves-effect waves-light">
-                                                    <i class="bx bx-check-circle font-size-16 align-middle me-2"></i>
-                                                    Activate
+                                                    class="btn btn-sm btn-danger waves-effect waves-light">
+                                                    Deactive
                                                 </button>
+
                                                 <form style="display:none" id="activate_trainer_form_{{ $trainer->u_id }}"
                                                     action="{{ route('admin.teams.activate', $trainer->u_id) }}"
                                                     method="post">
@@ -109,12 +112,14 @@
 
                                         <td>
                                             <a href="{{ route('admin.teams.edit', $trainer->u_id) }}"
-                                                class="btn btn-sm btn-success waves-effect waves-light">
-                                                <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
+                                                class="btn btn-sm btn-success waves-effect waves-light"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="bx bx-edit font-size-16 align-middle"></i>
                                             </a>
                                             <button type="button" onclick="confirmDelete({{ $trainer->u_id }})"
-                                                class="btn btn-sm btn-danger waves-effect waves-light">
-                                                <i class="bx bx-trash font-size-16 align-middle me-2"></i> Delete
+                                                class="btn btn-sm btn-danger waves-effect waves-light"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
                                             </button>
                                             <form style="display:hidden" id="delete_trainer_form_{{ $trainer->u_id }}"
                                                 action="{{ route('admin.teams.delete', $trainer->u_id) }}" method="post">
@@ -231,7 +236,6 @@
 
 
     <!-- end row -->
-
 @endsection
 @section('script')
     <!-- Sweet Alerts js -->
@@ -256,36 +260,38 @@
         }
 
         function confirmDeactivate(trainerId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, deactivate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If the user confirms, submit the form
-                    document.getElementById('deactivate_trainer_form_' + trainerId).submit();
-                }
-            })
+            document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+            // Swal.fire({
+            //     title: 'Are you sure?',
+            //     text: "You won't be able to revert this!",
+            //     icon: 'warning',
+            //     showCancelButton: true,
+            //     confirmButtonColor: '#3085d6',
+            //     cancelButtonColor: '#d33',
+            //     confirmButtonText: 'Yes, deactivate it!'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         // If the user confirms, submit the form
+            //         document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+            //     }
+            // })
         }
 
         function confirmActivate(trainerId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to activate this trainer!",
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, activate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('activate_trainer_form_' + trainerId).submit();
-                }
-            })
+            document.getElementById('activate_trainer_form_' + trainerId).submit();
+            // Swal.fire({
+            //     title: 'Are you sure?',
+            //     text: "You want to activate this trainer!",
+            //     icon: 'info',
+            //     showCancelButton: true,
+            //     confirmButtonColor: '#3085d6',
+            //     cancelButtonColor: '#d33',
+            //     confirmButtonText: 'Yes, activate it!'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         document.getElementById('activate_trainer_form_' + trainerId).submit();
+            //     }
+            // })
         }
     </script>
 @endsection

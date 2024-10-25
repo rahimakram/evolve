@@ -16,9 +16,13 @@ class Timeline extends Model
         'location_id',
         'instructor_id',
         'activity_ids',
+        'day',
         'date',
-        'time',
+        'start_time',
+        'end_time',
         'image',
+        'monthly_pass_price',
+        'single_pass_price',
         'status',
     ];
 }

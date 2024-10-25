@@ -35,8 +35,9 @@
             <div class="mb-64">
                 <div class="mxw-800 text-center m-auto">
                     <h2>Explore Our Locations</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a mattis elit. Nunc vel lectus libero.
-                        Sed quis sem ac sem imperdiet rutrum. Phasellus vel pulvinar tortor, ac scelerisque.</p>
+                    <p>Explore our Partner Facilities Offering you a range of 5-star hotels and gyms that are clean, well
+                        equipped and conveniently located across Doha, your wellness training is made easy with Evolve’s
+                        partner facilities.</p>
                 </div>
             </div>
             <div class="row">
@@ -59,15 +60,16 @@
                             aria-labelledby="locations-all-tab">
                             <div class="row mb-64">
                                 @forelse ($locations as $location)
-                                    <div class="col-md-3 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="2s">
+                                    <div class="col-md-3 wow fadeInUp mb-5" data-wow-delay="400ms" data-wow-duration="2s">
                                         <!-- Button trigger modal -->
                                         <div class="card btn location-card" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop-01" data-name="{{ $location->name }}"
                                             data-logo="{{ URL::asset('storage/' . $location->logo) }}"
                                             data-image="{{ URL::asset('storage/' . $location->image) }}"
                                             data-address="{{ $location->address }}"
-                                            data-description="{{ $location->description }}"
-                                            data-map-link="{{ $location->map_link }}"
+                                            data-description="{{ $location->description }}" {{-- data-map-link="{{ $location->map_link }}" --}}
+                                            data-latitude="{{ $location->latitude }}"
+                                            data-longitude="{{ $location->longitude }}"
                                             data-video-link="{{ $location->video_link }}"
                                             data-activities="{{ implode(', ', $location->activity_names->toArray()) }}">
                                             <div class="card-img-box">
@@ -92,7 +94,7 @@
                                     </div>
 
                                 @empty
-                                    <div class="col-md-3 wow fadeInUp" data-wow-delay="400ms" data-wow-duration="2s">
+                                    <div class="col-md-3 wow fadeInUp mb-5" data-wow-delay="400ms" data-wow-duration="2s">
                                         <!-- Button trigger modal -->
                                         <div class="card btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop-01">
                                             <div class="card-img-box">
@@ -219,12 +221,32 @@
                 var description = $(this).data('description');
                 var videoLink = $(this).data('video-link');
                 var activities = $(this).data('activities');
-                var mapLink = $(this).data('map-link');
+                // var mapLink = $(this).data('map-link');
+                var latitude = $(this).data('latitude');
+                var longitude = $(this).data('longitude');
 
-                if (!/^https?:\/\//i.test(mapLink)) {
-                    mapLink = 'http://' + mapLink;
-                }
+                // if (latitude) {
+                //     console.log(latitude);
 
+                // } else {
+                //     console.log("check empty");
+
+                // }
+                // return false;
+
+                var formattedLocationTitle = name.replace(/\s+/g, '+');
+
+
+                // Construct the Google Maps link
+                // var mapLink = 'https://www.google.com/maps/place/' + encodeURIComponent(name) + '/?q=' +
+                //     latitude + ',' + longitude;
+
+                var mapLink =
+                    `https://www.google.com/maps/place/${formattedLocationTitle}/@${latitude},${longitude},16z`;
+
+                // if (!/^https?:\/\//i.test(mapLink)) {
+                //     mapLink = 'http://' + mapLink;
+                // }
                 $('#modal-title').text(name);
                 $('#modal-image').attr('src', image);
                 $('#modal-address').text(address);
@@ -242,16 +264,6 @@
                 }).join('');
                 $('#modal-activities').html(activitiesHtml);
 
-                // Set video source and poster
-                // $('#modal-video-source').attr('src', video);
-                // Update the iframe src with the video link
-                // if (videoLink) {
-                //     $('#modal-video-container').show();
-                //     $('#modal-video').attr('src', videoLink);
-                // } else {
-                //     $('#modal-video-container')
-                //         .hide(); 
-                // }
                 if (videoLink) {
                     // Convert the standard YouTube link to an embeddable link and add the necessary parameters
                     var embedLink = videoLink.replace("watch?v=", "embed/") +

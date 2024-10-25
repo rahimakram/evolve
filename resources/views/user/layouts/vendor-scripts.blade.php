@@ -1,23 +1,31 @@
 <!-- JAVASCRIPT -->
 
-<script src="{{ URL::asset('dist/fontawesome/js/all.min.js') }}"></script>    
+<script src="{{ URL::asset('dist/fontawesome/js/all.min.js') }}"></script>
 <script src="{{ URL::asset('dist/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ URL::asset('dist/js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ URL::asset('dist/owl-carousel/js/owl.carousel.min.js') }}"></script>
 <script src="{{ URL::asset('dist/js/script.js') }}"></script>
 <script src="{{ URL::asset('dist/animate/dist/wow.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-    wow = new WOW(
-    {
-        boxClass:     'wow',      // default
+    // Toastr options (optional)
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right", // Adjust this position if needed
+        "timeOut": "5000", // 5 seconds
+    };
+</script>
+<script>
+    wow = new WOW({
+        boxClass: 'wow', // default
         animateClass: 'animated', // default
-        offset:       0          // default
-    }
-    )
+        offset: 0 // default
+    })
     wow.init();
 </script>
 <script>
-    $('#change-password').on('submit',function(event){
+    $('#change-password').on('submit', function(event) {
         event.preventDefault();
         var Id = $('#data_id').val();
         var current_password = $('#current-password').val();
@@ -28,29 +36,30 @@
         $('#password_confirmError').text('');
         $.ajax({
             url: "{{ url('update-password') }}" + "/" + Id,
-            type:"POST",
-            data:{
+            type: "POST",
+            data: {
                 "current_password": current_password,
                 "password": password,
                 "password_confirmation": password_confirm,
                 "_token": "{{ csrf_token() }}",
             },
-            success:function(response){
+            success: function(response) {
                 $('#current_passwordError').text('');
                 $('#passwordError').text('');
                 $('#password_confirmError').text('');
-                if(response.isSuccess == false){ 
+                if (response.isSuccess == false) {
                     $('#current_passwordError').text(response.Message);
-                }else if(response.isSuccess == true){
-                    setTimeout(function () {   
-                        window.location.href = "{{ route('root') }}"; 
+                } else if (response.isSuccess == true) {
+                    setTimeout(function() {
+                        window.location.href = "{{ route('root') }}";
                     }, 1000);
                 }
             },
             error: function(response) {
                 $('#current_passwordError').text(response.responseJSON.errors.current_password);
                 $('#passwordError').text(response.responseJSON.errors.password);
-                $('#password_confirmError').text(response.responseJSON.errors.password_confirmation);
+                $('#password_confirmError').text(response.responseJSON.errors
+                    .password_confirmation);
             }
         });
     });
@@ -59,6 +68,6 @@
 @yield('script')
 
 <!-- App js -->
-<!-- <script src="{{ URL::asset('build/js/app.js')}}"></script> -->
+<!-- <script src="{{ URL::asset('build/js/app.js') }}"></script> -->
 
 @yield('script-bottom')

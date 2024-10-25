@@ -109,7 +109,7 @@ class SpecializationController extends Controller
         $is_specialization_updated = $specialization->update();
 
         if ($is_specialization_updated) {
-            return redirect()->route('admin.specialization.index')->with('success', 'Specialization activated successfully');
+            return redirect()->route('admin.specialization.index')->with('success', 'Status is Active');
         }
     }
 
@@ -120,7 +120,7 @@ class SpecializationController extends Controller
         $is_specialization_updated = $specialization->update();
 
         if ($is_specialization_updated) {
-            return redirect()->route('admin.specialization.index')->with('success', 'Specialization deactivated successfully');
+            return redirect()->route('admin.specialization.index')->with('success', 'Status is Deactive');
         }
     }
 }

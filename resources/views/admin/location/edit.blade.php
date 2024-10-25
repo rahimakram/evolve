@@ -23,7 +23,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Edit Location</h4>
+                    {{-- <h4 class="card-title mb-4">Edit Location</h4> --}}
 
                     <form method="post" action="{{ route('admin.location.update', $location->id) }}"
                         enctype="multipart/form-data">
@@ -31,9 +31,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="location_name" class="form-label">Name</label>
+                                    <label for="location_name" class="form-label">Location Name</label>
                                     <input type="text" class="form-control" id="location_name" name="location_name"
-                                        placeholder="Enter Your Name"
+                                        placeholder="Enter Location Name"
                                         value="{{ old('location_name') ? old('location_name') : $location->name }}">
                                     @error('location_name')
                                         <span class="text-danger">{{ $message }}</span>
@@ -75,10 +75,19 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <!-- Show current image if available -->
                                 @if ($location->logo)
-                                    <img id="logo-preview" src="{{ asset('storage/' . $location->logo) }}"
-                                        alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                    <div style="position: relative" id="logo-preview-container">
+                                        <img id="logo-preview" src="{{ asset('storage/' . $location->logo) }}"
+                                            alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                        <button type="button" id="delete-logo-btn"
+                                            style="position: absolute; top:20px; left:80px"
+                                            onclick="confirmDelete('{{ $location->logo }}',{{ $location->id }},'logo')"
+                                            class="btn btn-sm waves-effect btn-danger waves-light rounded-circle">
+                                            <i class="bx bx-trash font-size-16 align-middle"></i>
+                                        </button>
+                                    </div>
                                 @else
                                     <img id="logo-preview" class="rounded-circle avatar-xl mt-3" src="#"
                                         alt="Logo Preview" style="display: none;" />
@@ -93,10 +102,19 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <!-- Show current image if available -->
                                 @if ($location->image)
-                                    <img id="image-preview" src="{{ asset('storage/' . $location->image) }}"
-                                        alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                    <div style="position: relative" id="image-preview-container">
+                                        <img id="image-preview" src="{{ asset('storage/' . $location->image) }}"
+                                            alt="Current Image" class="rounded-circle avatar-xl mt-3" />
+                                        <button type="button" id="delete-img-btn"
+                                            style="position: absolute; top:20px; left:80px"
+                                            onclick="confirmDelete('{{ $location->image }}',{{ $location->id }},'image')"
+                                            class="btn btn-sm waves-effect btn-danger waves-light rounded-circle">
+                                            <i class="bx bx-trash font-size-16 align-middle"></i>
+                                        </button>
+                                    </div>
                                 @else
                                     <img id="image-preview" class="rounded-circle avatar-xl mt-3" src="#"
                                         alt="Image Preview" style="display: none;" />
@@ -105,7 +123,6 @@
                         </div>
 
                         <div class="row mt-3">
-
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="video_link" class="form-label">Video Link</label>
@@ -118,7 +135,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="map_link" class="form-label">Map Link</label>
                                     <input type="text" class="form-control" id="map_link" name="map_link"
@@ -128,9 +145,33 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                            </div> --}}
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
+                                        placeholder="Enter Latitude"
+                                        value="{{ old('latitude') ? old('latitude') : $location->latitude }}">
+                                    @error('latitude')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
 
-
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="longitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
+                                        placeholder="Enter Longitude"
+                                        value="{{ old('longitude') ? old('longitude') : $location->longitude }}">
+                                    @error('longitude')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row mt-3">
@@ -138,7 +179,7 @@
                                 <div class="mb-3">
                                     <label for="description-editor" class="form-label">Description</label>
                                     <textarea name="description" class="form-control" rows="3" id="description-editor"
-                                        placeholder="Enter Your description">{{ old('description') ? old('description') : $location->description }}</textarea>
+                                        placeholder="Enter location description">{{ old('description') ? old('description') : $location->description }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -189,6 +230,68 @@
     <script src="{{ URL::asset('build/js/pages/form-editor.init.js') }}"></script>
 
     <script>
+        function confirmDelete(imgPath, id, type) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    if (imgPath) {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+
+                        $.ajax({
+                            url: "{{ route('admin.delete.img') }}", // Your route to fetch activities
+                            type: "POST",
+                            data: {
+                                imgPath: imgPath,
+                                id: id,
+                                model: 'Location',
+                                type: type
+                            },
+                            success: function(data) {
+                                if (data.msg == 'success') {
+                                    // $('#image-preview').css('display', 'none');
+                                    if (type == 'image') {
+                                        $('#image-preview-container').css('display', 'none');
+                                    }
+
+                                    if (type == 'logo') {
+                                        $('#logo-preview-container').css('display', 'none');
+                                    }
+
+                                    toastr.success(data.message, 'Success');
+
+                                    // Hide the message after 5 seconds (optional)
+                                    setTimeout(function() {
+                                        $('#ajax-message').fadeOut();
+                                    }, 5000);
+                                }
+
+                            },
+                            error: function(error) {
+                                // console.log("Error fetching activities:", error);
+                                $('#ajax-message').html('An error occurred!').show();
+                            }
+                        });
+
+                    }
+
+                }
+            })
+        }
+    </script>
+
+    <script>
         tinymce.init({
             selector: '#description-editor', // Match the ID of the textarea
             height: 300,
@@ -199,20 +302,30 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                                                                                                                                                alignleft aligncenter alignright alignjustify | \
-                                                                                                                                                bullist numlist outdent indent | removeformat | help'
+                                                                                                                                                                                                                                                                                                                                                        alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                                                                                                                                                                                                                        bullist numlist outdent indent | removeformat | help'
         });
     </script>
     <script>
         function previewLogo(event) {
             const imagePreview = document.getElementById('logo-preview');
+            const imagePreviewContainer = document.getElementById('logo-preview-container');
             const file = event.target.files[0];
+            const dltBtn = document.getElementById('delete-logo-btn');
 
             if (file) {
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
+
+                    if (imagePreviewContainer) {
+                        imagePreviewContainer.style.display = 'block'; // Show the image preview
+                    }
+                    if (dltBtn) {
+
+                        dltBtn.style.display = 'none';
+                    }
                     imagePreview.style.display = 'block'; // Show the image preview
                 }
 
@@ -223,12 +336,21 @@
         function previewImage(event) {
             const imagePreview = document.getElementById('image-preview');
             const file = event.target.files[0];
+            const imagePreviewContainer = document.getElementById('image-preview-container');
+            const dltBtn = document.getElementById('delete-img-btn');
 
             if (file) {
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
                     imagePreview.src = e.target.result;
+                    if (imagePreviewContainer) {
+                        imagePreviewContainer.style.display = 'block'; // Show the image preview
+                    }
+                    if (dltBtn) {
+
+                        dltBtn.style.display = 'none';
+                    }
                     imagePreview.style.display = 'block'; // Show the image preview
                 }
 

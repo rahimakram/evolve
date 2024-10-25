@@ -8,13 +8,12 @@
     <link href="{{ URL::asset('build/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-
     @component('admin.components.breadcrumb')
         @slot('li_1')
             Dashboard
         @endslot
         @slot('title')
-            Personal Timeline
+            Timetable
         @endslot
     @endcomponent
     {{-- {{ $timelines }} --}}
@@ -26,16 +25,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row mb-2">
-                        @session('success')
+                        {{-- @session('success')
                             <div class="alert alert-success" role="alert"> {{ $value }} </div>
-                        @endsession
+                        @endsession --}}
                         <div class="col-sm-4">
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-end">
                                 <a href="{{ route('admin.timeline.add') }}"
                                     class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i
-                                        class="mdi mdi-plus me-1"></i> Create Timeline</a>
+                                        class="mdi mdi-plus me-1"></i> Create Timetable</a>
                             </div>
                         </div><!-- end col-->
                     </div>
@@ -49,7 +48,7 @@
                                     <th scope="col">Location</th>
                                     <th scope="col">Instructor</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Image</th>
+                                    {{-- <th scope="col">Image</th> --}}
                                     <th scope="col" style="width: 200px;">Status</th>
                                     <th scope="col" style="width: 200px;">Actions</th>
                                 </tr>
@@ -70,16 +69,16 @@
                                             @endif --}}
                                         </td> <!-- Trainer's specialization -->
 
-                                        <td><img class="rounded-circle header-profile-user"
-                                                src="{{ asset('storage/' . $timeline->image) }}"></td>
+                                        {{-- <td><img class="rounded-circle header-profile-user"
+                                                src="{{ asset('storage/' . $timeline->image) }}"></td> --}}
                                         <!-- Trainer's description -->
 
                                         <td>
                                             @if ($timeline->status == 'Y')
-                                                <!-- Deactivate Button -->
                                                 <button onclick="confirmDeactivate({{ $timeline->id }})" type="button"
-                                                    class="btn btn-sm btn-danger waves-effect waves-light">
-                                                    <i class="bx bx-block font-size-16 align-middle me-2"></i> Deactivate
+                                                    class="btn btn-sm btn-success waves-effect waves-light">
+
+                                                    Active
                                                 </button>
                                                 <form style="display:none" id="deactivate_trainer_form_{{ $timeline->id }}"
                                                     action="{{ route('admin.timeline.deactivate', $timeline->id) }}"
@@ -87,12 +86,13 @@
                                                     @csrf
                                                 </form>
                                             @else
-                                                <!-- Activate Button -->
+                                                <!-- Deactivate Button -->
                                                 <button onclick="confirmActivate({{ $timeline->id }})" type="button"
-                                                    class="btn btn-sm btn-success waves-effect waves-light">
-                                                    <i class="bx bx-check-circle font-size-16 align-middle me-2"></i>
-                                                    Activate
+                                                    class="btn btn-sm btn-danger waves-effect waves-light">
+                                                    Deactive
                                                 </button>
+                                                <!-- Activate Button -->
+
                                                 <form style="display:none" id="activate_trainer_form_{{ $timeline->id }}"
                                                     action="{{ route('admin.timeline.activate', $timeline->id) }}"
                                                     method="post">
@@ -103,14 +103,15 @@
 
 
                                         <td>
-                                            <!-- Action Buttons: Edit & Delete -->
                                             <a href="{{ route('admin.timeline.edit', $timeline->id) }}"
-                                                class="btn btn-sm btn-success waves-effect waves-light">
-                                                <i class="bx bx-edit font-size-16 align-middle me-2"></i> Edit
+                                                class="btn btn-sm waves-effect btn-success waves-light"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
+                                                <i class="bx bx-edit font-size-16 align-middle"></i>
                                             </a>
                                             <button type="button" onclick="confirmDelete({{ $timeline->id }})"
-                                                class="btn btn-sm btn-danger waves-effect waves-light">
-                                                <i class="bx bx-trash font-size-16 align-middle me-2"></i> Delete
+                                                class="btn btn-sm waves-effect btn-danger waves-light"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                                <i class="bx bx-trash font-size-16 align-middle"></i>
                                             </button>
                                             <form style="display:hidden" id="delete_trainer_form_{{ $timeline->id }}"
                                                 action="{{ route('admin.timeline.delete', $timeline->id) }}"
@@ -234,7 +235,6 @@
 
 
     <!-- end row -->
-
 @endsection
 @section('script')
     <!-- Sweet Alerts js -->
@@ -259,36 +259,38 @@
         }
 
         function confirmDeactivate(trainerId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, deactivate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If the user confirms, submit the form
-                    document.getElementById('deactivate_trainer_form_' + trainerId).submit();
-                }
-            })
+            document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+            // Swal.fire({
+            //     title: 'Are you sure?',
+            //     text: "You won't be able to revert this!",
+            //     icon: 'warning',
+            //     showCancelButton: true,
+            //     confirmButtonColor: '#3085d6',
+            //     cancelButtonColor: '#d33',
+            //     confirmButtonText: 'Yes, deactivate it!'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         // If the user confirms, submit the form
+            //         document.getElementById('deactivate_trainer_form_' + trainerId).submit();
+            //     }
+            // })
         }
 
         function confirmActivate(trainerId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to activate this trainer!",
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, activate it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('activate_trainer_form_' + trainerId).submit();
-                }
-            })
+            document.getElementById('activate_trainer_form_' + trainerId).submit();
+            // Swal.fire({
+            //     title: 'Are you sure?',
+            //     text: "You want to activate this trainer!",
+            //     icon: 'info',
+            //     showCancelButton: true,
+            //     confirmButtonColor: '#3085d6',
+            //     cancelButtonColor: '#d33',
+            //     confirmButtonText: 'Yes, activate it!'
+            // }).then((result) => {
+            //     if (result.isConfirmed) {
+            //         document.getElementById('activate_trainer_form_' + trainerId).submit();
+            //     }
+            // })
         }
     </script>
 @endsection

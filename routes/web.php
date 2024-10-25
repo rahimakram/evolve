@@ -52,6 +52,8 @@ Auth::routes();
   Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
 
   Route::prefix('admin')->as('admin.')->group(function () {
+
+    Route::post('/delete-img', [AdminController::class, 'delete_img'])->name('delete.img');
     // teams
     Route::controller(TeamController::class)->prefix('team')->as('teams.')->group(function () {
       Route::get('/', 'index')->name('index');
@@ -131,6 +133,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 Route::get('/our-team', [OurTeamController::class, 'our_team'])->name('our.team');
+Route::post('/trainer-info-modal', [OurTeamController::class, 'trainer_info_modal'])->name('trainer.info.modal');
 Route::get('/our-locations', [OurLocationController::class, 'our_location'])->name('our.location');
 Route::get('/join-a-class', [JoinClassController::class, 'join_class'])->name('join.our.class');
 Route::get('/single-pass-payment/{id}', [JoinClassController::class, 'single_pass_payment'])->name('single.pass.payment');

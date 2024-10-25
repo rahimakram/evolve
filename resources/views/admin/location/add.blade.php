@@ -27,7 +27,7 @@
                     @session('success')
                         <div class="alert alert-success" role="alert"> {{ $value }} </div>
                     @endsession
-                    <h4 class="card-title mb-4">Create Location</h4>
+                    {{-- <h4 class="card-title mb-4">Create Location</h4> --}}
 
                     <form method="post" action="{{ route('admin.location.create') }}" enctype="multipart/form-data">
                         @csrf
@@ -35,9 +35,9 @@
 
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="location_name" class="form-label">Name</label>
+                                    <label for="location_name" class="form-label">Location name</label>
                                     <input type="text" class="form-control" id="location_name" name="location_name"
-                                        placeholder="Enter Your Name" value="{{ old('location_name') }}">
+                                        placeholder="Enter Location Name" value="{{ old('location_name') }}">
                                     @error('location_name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -68,7 +68,7 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <div class="mt-3">
+                                <div class="">
                                     <label for="logo" class="form-label">Logo</label>
                                     <input class="form-control" type="file" id="logo" name="logo"
                                         accept="image/*" onchange="previewLogo(event)">
@@ -80,7 +80,7 @@
                                     style="max-width: 100px; min-height: 100px; display: none;">
                             </div>
                             <div class="col-md-6">
-                                <div class="mt-3">
+                                <div class="">
                                     <label for="formFile" class="form-label">Image</label>
                                     <input class="form-control" type="file" id="formFile" name="image"
                                         accept="image/*" onchange="previewImage(event)">
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="map_link" class="form-label">Map Link</label>
                                     <input type="text" class="form-control" id="map_link" name="map_link"
@@ -115,16 +115,45 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                            </div> --}}
+
+
+                        </div>
+
+                        <div class="row mt-3">
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="latitude" class="form-label">Latitude</label>
+                                    <input type="text" class="form-control" id="latitude" name="latitude"
+                                        placeholder="Enter Latitude" value="{{ old('latitude') }}">
+                                    @error('latitude')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="longitude" class="form-label">Longitude</label>
+                                    <input type="text" class="form-control" id="longitude" name="longitude"
+                                        placeholder="Enter Longitude" value="{{ old('longitude') }}">
+                                    @error('longitude')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
 
 
                         </div>
-                        <div class="row mt-3">
+
+
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label for="description-editor" class="form-label">Description</label>
                                     <textarea name="description" class="form-control" rows="3" id="description-editor"
-                                        placeholder="Enter Your description">{{ old('description') }}</textarea>
+                                        placeholder="Enter location description">{{ old('description') }}</textarea>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -183,8 +212,8 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo | formatselect | bold italic backcolor | \
-                                                                                                                                    alignleft aligncenter alignright alignjustify | \
-                                                                                                                                    bullist numlist outdent indent | removeformat | help'
+                                                                                                                                                                                                        alignleft aligncenter alignright alignjustify | \
+                                                                                                                                                                                                        bullist numlist outdent indent | removeformat | help'
         });
     </script>
     <script>
